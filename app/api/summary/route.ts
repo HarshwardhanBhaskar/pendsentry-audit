@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { ToolAuditResult } from '../../../lib/auditEngine';
 
 export async function POST(request: Request) {
   try {
@@ -9,7 +10,7 @@ export async function POST(request: Request) {
     const activeFindings: string[] = [];
     if (toolBreakdown) {
       for (const [key, value] of Object.entries(toolBreakdown)) {
-        const val = value as any;
+        const val = value as ToolAuditResult;
         if (val.display && val.monthlySavings > 0) {
           activeFindings.push(`- ${key}: Current Spend $${val.currentSpend}/mo, Optimized Spend $${val.optimizedSpend}/mo. Savings: $${val.monthlySavings}/mo. Recommendation: ${val.recommendation}. Reason: ${val.reason}`);
         }
@@ -92,7 +93,7 @@ Generate the personalized 100-word CFO summary:`,
     }
 
     return NextResponse.json({ summary: personalSummary });
-  } catch (error: any) {
+  } catch (error) {
     console.error('Summary API Endpoint Error:', error);
     return NextResponse.json({ error: 'Failed to generate audit summary.' }, { status: 500 });
   }

@@ -47,8 +47,9 @@ export async function POST(request: Request) {
       } else if (data) {
         savedId = data.id;
       }
-    } catch (err: any) {
-      console.warn('Supabase DB Connection omitted or local fallback active:', err.message);
+    } catch (err) {
+      const errMsg = err instanceof Error ? err.message : String(err);
+      console.warn('Supabase DB Connection omitted or local fallback active:', errMsg);
     }
 
     // Return UUID and stripped public audit payload
@@ -65,7 +66,7 @@ export async function POST(request: Request) {
         credexLeadEligible: auditResult.credexLeadEligible,
       },
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error('Audit API Endpoint Error:', error);
     return NextResponse.json({ error: 'Failed to process audit report.' }, { status: 500 });
   }

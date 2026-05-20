@@ -1,4 +1,4 @@
-import { PRICING_DATABASE, ToolName, PrimaryUseCase, PlanDetails } from './pricingData';
+import { PRICING_DATABASE, ToolName, PrimaryUseCase } from './pricingData';
 
 export interface UserToolInput {
   enabled: boolean;
@@ -34,7 +34,7 @@ export interface AuditReport {
 }
 
 export function runSpendAudit(input: AuditInput): AuditReport {
-  const breakdown: Record<ToolName, ToolAuditResult> = {} as any;
+  const breakdown = {} as Record<ToolName, ToolAuditResult>;
   let totalMonthlySpend = 0;
   let totalOptimizedSpend = 0;
 
@@ -62,7 +62,7 @@ export function runSpendAudit(input: AuditInput): AuditReport {
     };
   }
 
-  const { teamSize, primaryUseCase, tools } = input;
+  const { tools } = input;
 
   // 1. Calculate base costs for each tool
   for (const toolKey of toolsList) {
@@ -84,7 +84,7 @@ export function runSpendAudit(input: AuditInput): AuditReport {
     } else {
       // Standard seat-based charge
       const pricePerSeat = plan.pricePerSeat;
-      let effectiveSeats = userInput.seats;
+      const effectiveSeats = userInput.seats;
 
       // Handle minimum seat limits enforced by vendors at retail
       if (plan.minSeats && effectiveSeats < plan.minSeats) {
@@ -229,7 +229,6 @@ export function runSpendAudit(input: AuditInput): AuditReport {
   ) {
     // If they have both, and they are coding or writing, they can consolidate models into Cursor Pro / Windsurf Pro!
     // Or just consolidate into one primary chat tool
-    const chatgptAud = breakdown.chatgpt;
     const claudeAud = breakdown.claude;
 
     // We flag this on Claude Pro to avoid duplicate flagging on both tools

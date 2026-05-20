@@ -19,20 +19,17 @@ jobs:
         with:
           node-version: 22
           cache: 'npm'
-          cache-dependency-path: spend-sentry/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install Dependencies
-        working-directory: ./spend-sentry
         run: npm ci
 
       - name: Run ESLint Linter
-        working-directory: ./spend-sentry
         run: npm run lint
 
       - name: TypeScript Typecheck
-        working-directory: ./spend-sentry
         run: npx tsc --noEmit
 
       - name: Run Vitest Unit Tests
-        working-directory: ./spend-sentry
         run: npm run test
+

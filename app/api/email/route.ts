@@ -68,8 +68,9 @@ export async function POST(request: Request) {
           emailSent = true;
           details = `Dispatched successfully via Resend. ID: ${data.id}`;
         }
-      } catch (resendError: any) {
-        console.error('Resend API Call Failed, logging local fallback details:', resendError.message);
+      } catch (resendError) {
+        const errMsg = resendError instanceof Error ? resendError.message : String(resendError);
+        console.error('Resend API Call Failed, logging local fallback details:', errMsg);
       }
     } else {
       console.log('--------------------------------------------------');
@@ -85,7 +86,7 @@ export async function POST(request: Request) {
       sent: emailSent,
       details,
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error('Email API Endpoint Error:', error);
     return NextResponse.json({ error: 'Failed to dispatch email confirmation.' }, { status: 500 });
   }

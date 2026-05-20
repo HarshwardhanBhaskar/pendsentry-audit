@@ -4,19 +4,16 @@ import React from 'react';
 import { 
   Users, 
   Terminal, 
-  Settings, 
   Code, 
   FileText, 
   Database, 
   Search, 
-  HelpCircle, 
   Layers,
   Sparkles,
-  Zap,
-  Globe
+  Zap
 } from 'lucide-react';
 import { PRICING_DATABASE, ToolName, PrimaryUseCase } from '../lib/pricingData';
-import { UserToolInput, AuditInput } from '../lib/auditEngine';
+import { AuditInput } from '../lib/auditEngine';
 
 interface AuditFormProps {
   formData: AuditInput;
@@ -25,7 +22,7 @@ interface AuditFormProps {
 }
 
 export default function AuditForm({ formData, setFormData, onSubmit }: AuditFormProps) {
-  const handleGeneralChange = (field: 'teamSize' | 'primaryUseCase', value: any) => {
+  const handleGeneralChange = (field: 'teamSize' | 'primaryUseCase', value: number | PrimaryUseCase) => {
     setFormData((prev) => {
       const updated = { ...prev, [field]: value };
       

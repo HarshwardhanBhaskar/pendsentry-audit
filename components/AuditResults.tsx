@@ -5,23 +5,21 @@ import {
   TrendingDown, 
   Mail, 
   Share2, 
-  ExternalLink, 
   Copy, 
   Check, 
   RotateCcw, 
   Calendar, 
   BadgePercent, 
   ShieldCheck,
-  ChevronRight,
   Sparkles,
   ArrowRight
 } from 'lucide-react';
-import { AuditReport, ToolAuditResult } from '../lib/auditEngine';
+import { AuditReport, ToolAuditResult, AuditInput } from '../lib/auditEngine';
 import { PRICING_DATABASE, ToolName } from '../lib/pricingData';
 
 interface AuditResultsProps {
   report: AuditReport;
-  formData: any;
+  formData: AuditInput;
   onReset: () => void;
 }
 
@@ -36,7 +34,6 @@ export default function AuditResults({ report, formData, onReset }: AuditResults
   const [honeypot, setHoneypot] = useState<string>('');
   const [submittingLead, setSubmittingLead] = useState<boolean>(false);
   const [leadSaved, setLeadSaved] = useState<boolean>(false);
-  const [savedId, setSavedId] = useState<string>('');
   const [copiedLink, setCopiedLink] = useState<boolean>(false);
   const [shareUrl, setShareUrl] = useState<string>('');
 
@@ -106,7 +103,6 @@ export default function AuditResults({ report, formData, onReset }: AuditResults
       const auditData = await auditRes.json();
       
       const uuid = auditData.id;
-      setSavedId(uuid);
 
       // Determine current hostname for sharing
       const origin = typeof window !== 'undefined' ? window.location.origin : 'https://spendsentry.com';
@@ -130,7 +126,6 @@ export default function AuditResults({ report, formData, onReset }: AuditResults
       console.error('Lead capture error:', err);
       // Fallback local UUID for testing
       const localUuid = 'demo-' + Math.random().toString(36).substring(2, 10);
-      setSavedId(localUuid);
       const origin = typeof window !== 'undefined' ? window.location.origin : 'https://spendsentry.com';
       setShareUrl(`${origin}/share/${localUuid}`);
       setLeadSaved(true);
@@ -199,7 +194,7 @@ export default function AuditResults({ report, formData, onReset }: AuditResults
           </div>
         ) : (
           <p style={{ margin: 0, fontSize: '14px', lineHeight: '1.6', color: 'var(--text-primary)', fontStyle: 'italic' }}>
-            "{summary}"
+            &ldquo;{summary}&rdquo;
           </p>
         )}
       </div>
@@ -297,7 +292,7 @@ export default function AuditResults({ report, formData, onReset }: AuditResults
             <h3 style={{ margin: 0, fontSize: '18px', color: 'var(--color-success)' }}>🛡️ Your AI Stack is 100% Optimal!</h3>
           </div>
           <p style={{ margin: 0, fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
-            Amazing job. You are currently outperforming **94% of startups** in your team tier on AI spend. Your subscriptions are extremely lean and leakage-free. We won't manufacture fake savings just to make an offer.
+            Amazing job. You are currently outperforming **94% of startups** in your team tier on AI spend. Your subscriptions are extremely lean and leakage-free. We won&apos;t manufacture fake savings just to make an offer.
           </p>
         </div>
       ) : null}
@@ -379,7 +374,7 @@ export default function AuditResults({ report, formData, onReset }: AuditResults
             <Share2 size={18} /> Dynamic Share Link Activated!
           </h3>
           <p style={{ margin: '0 0 16px 0', fontSize: '13px', color: 'var(--text-secondary)' }}>
-            Your audit report has been saved. We've emailed you a full summary. You can share your optimized profile (stripping company name and email for privacy) with your team or social network using the link below:
+            Your audit report has been saved. We&apos;ve emailed you a full summary. You can share your optimized profile (stripping company name and email for privacy) with your team or social network using the link below:
           </p>
 
           <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>

@@ -9,12 +9,10 @@ import {
   Sparkles, 
   ShieldCheck, 
   BadgePercent,
-  CheckCircle,
-  AlertTriangle,
   ArrowRight,
   Info
 } from 'lucide-react';
-import { runSpendAudit, AuditInput, AuditReport } from '../../../lib/auditEngine';
+import { runSpendAudit, AuditInput, AuditReport, ToolAuditResult } from '../../../lib/auditEngine';
 import { PRICING_DATABASE, ToolName } from '../../../lib/pricingData';
 import { supabase } from '../../../lib/supabase';
 
@@ -24,7 +22,7 @@ interface PageProps {
 }
 
 // 1. STABLE MOCK FALLBACK SYSTEM FOR AUDITS
-function getMockAuditInput(id: string): AuditInput {
+function getMockAuditInput(): AuditInput {
   // Return a realistic multi-fault stack to showcase all audit engine features beautifully
   return {
     teamSize: 12,
@@ -44,7 +42,7 @@ function getMockAuditInput(id: string): AuditInput {
 
 async function fetchAuditData(id: string): Promise<AuditReport> {
   if (!id || id.startsWith('demo-') || id.startsWith('local-')) {
-    return runSpendAudit(getMockAuditInput(id));
+    return runSpendAudit(getMockAuditInput());
   }
 
   try {
@@ -56,13 +54,13 @@ async function fetchAuditData(id: string): Promise<AuditReport> {
 
     if (error || !data) {
       console.warn('Database record not found or connection failed. Using resilient mock fallback.');
-      return runSpendAudit(getMockAuditInput(id));
+      return runSpendAudit(getMockAuditInput());
     }
 
     return runSpendAudit(data.raw_input as AuditInput);
-  } catch (err) {
+  } catch {
     console.warn('Supabase fetch failed. Falling back to static mock data.');
-    return runSpendAudit(getMockAuditInput(id));
+    return runSpendAudit(getMockAuditInput());
   }
 }
 
@@ -204,7 +202,7 @@ export default async function SharePage({ params }: PageProps) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {Object.entries(report.toolBreakdown).map(([key, value]) => {
                 const toolKey = key as ToolName;
-                const val = value as any;
+                const val = value as ToolAuditResult;
                 if (!val.display) return null;
 
                 const hasSavings = val.monthlySavings > 0;

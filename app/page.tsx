@@ -3,14 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { 
   ShieldCheck, 
-  TrendingDown, 
   HelpCircle, 
   Coins, 
-  Layers, 
-  Terminal, 
-  Globe,
-  Sparkles,
-  Zap,
   Lock,
   ExternalLink
 } from 'lucide-react';
@@ -36,7 +30,19 @@ const initialFormState: AuditInput = {
 };
 
 export default function Home() {
-  const [formData, setFormData] = useState<AuditInput>(initialFormState);
+  const [formData, setFormData] = useState<AuditInput>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+        if (stored) {
+          return JSON.parse(stored);
+        }
+      } catch (err) {
+        console.warn('Failed to rehydrate form state:', err);
+      }
+    }
+    return initialFormState;
+  });
   const [report, setReport] = useState<AuditReport | null>(null);
   
   // Auditing animation phases
@@ -51,17 +57,7 @@ export default function Home() {
     'Compiling defensible financial optimization report...'
   ];
 
-  // Rehydrate form state from LocalStorage on page load
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
-      if (stored) {
-        setFormData(JSON.parse(stored));
-      }
-    } catch (err) {
-      console.warn('Failed to rehydrate form state:', err);
-    }
-  }, []);
+
 
   // Persist form state to LocalStorage on every change
   useEffect(() => {
@@ -181,7 +177,7 @@ export default function Home() {
                 Stop Burning Cash on Duplicate, Overpriced AI Subscriptions.
               </h1>
               <p style={{ fontSize: '15px', lineHeight: '1.6', color: 'var(--text-secondary)', margin: '0 0 20px 0' }}>
-                Startups frequently pay retail rates for duplicate coding seats, fall into seat-minimum billing traps (like Claude Team's 5-seat minimum), or overpay for direct API traffic. SpendSentry runs hard, defensible calculations to instantly show you where to consolidate, downgrade, or switch to bulk credits.
+                Startups frequently pay retail rates for duplicate coding seats, fall into seat-minimum billing traps (like Claude Team&apos;s 5-seat minimum), or overpay for direct API traffic. SpendSentry runs hard, defensible calculations to instantly show you where to consolidate, downgrade, or switch to bulk credits.
               </p>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '13px', color: 'var(--text-secondary)' }}>
@@ -202,7 +198,7 @@ export default function Home() {
                 Verified Startup Savings
               </h3>
               <div style={{ fontStyle: 'italic', fontSize: '13px', color: 'var(--text-secondary)', borderLeft: '3px solid #3b82f6', paddingLeft: '12px' }}>
-                "We ran SpendSentry and discovered we were double-paying for GitHub Copilot seats while our engineering team had already switched to Cursor. We canceled the redundant licenses and saved $780/month in 5 minutes."
+                &ldquo;We ran SpendSentry and discovered we were double-paying for GitHub Copilot seats while our engineering team had already switched to Cursor. We canceled the redundant licenses and saved $780/month in 5 minutes.&rdquo;
                 <div style={{ marginTop: '6px', fontSize: '11px', color: 'var(--text-muted)', fontStyle: 'normal', fontWeight: 'bold' }}>
                   — Aris K., VP of Engineering at FlowState (Team of 40)
                 </div>
@@ -244,7 +240,7 @@ export default function Home() {
               </div>
 
               <div className="glass-card" style={{ padding: '16px' }}>
-                <h4 style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#ffffff' }}>What makes your audit recommendations "defensible"?</h4>
+                <h4 style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#ffffff' }}>What makes your audit recommendations &ldquo;defensible&rdquo;?</h4>
                 <p style={{ margin: 0, fontSize: '12px', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
                   We do not use speculative AI to guess costs. Our engine executes exact mathematical rules using real-time verified pricing pages (SSO upgrades, team minimums, and API scopes) that any finance officer can verify.
                 </p>
