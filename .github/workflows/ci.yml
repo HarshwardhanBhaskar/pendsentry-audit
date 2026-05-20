@@ -1,0 +1,38 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (v22)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          cache-dependency-path: spend-sentry/package-lock.json
+
+      - name: Install Dependencies
+        working-directory: ./spend-sentry
+        run: npm ci
+
+      - name: Run ESLint Linter
+        working-directory: ./spend-sentry
+        run: npm run lint
+
+      - name: TypeScript Typecheck
+        working-directory: ./spend-sentry
+        run: npx tsc --noEmit
+
+      - name: Run Vitest Unit Tests
+        working-directory: ./spend-sentry
+        run: npm run test
