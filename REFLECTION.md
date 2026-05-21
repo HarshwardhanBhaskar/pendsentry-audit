@@ -71,7 +71,7 @@ While writing the initial audit math, the AI suggested that Claude Team plan pri
 ## 5. Self-Rating Across Dimensions
 
 - **Discipline: 9/10**  
-  *Reason:* Kept a rigid, daily devlog, spread code commits across five distinct days, and started architectural research on day one rather than rushing a weekend sprint.
+  *Reason:* Kept a rigid, daily devlog, maintained consistent commit discipline across the sprint, and started architectural research on day one rather than rushing a weekend cramp.
 - **Code Quality: 9/10**  
   *Reason:* Enforced strong TypeScript schemas, wrote clean pure-functions with zero side effects for our audit engine, and documented every function with clear type annotations.
 - **Design Sense: 8.5/10**  

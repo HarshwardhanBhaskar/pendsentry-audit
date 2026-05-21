@@ -1,9 +1,25 @@
 import { NextResponse } from 'next/server';
 import { runSpendAudit, AuditInput } from '../../../lib/auditEngine';
 import { supabase } from '../../../lib/supabase';
+import { checkRateLimit } from '../../../lib/rateLimit';
 
 export async function POST(request: Request) {
   try {
+    // IP-based rate limiting: 5 audit submissions per 60-second window
+    const forwarded = request.headers.get('x-forwarded-for');
+    const ip = forwarded ? forwarded.split(',')[0].trim() : 'unknown';
+    const rateLimitResult = checkRateLimit(ip, { maxRequests: 5, windowMs: 60_000 });
+
+    if (!rateLimitResult.allowed) {
+      return NextResponse.json(
+        { error: 'Rate limit exceeded. Please try again shortly.' },
+        { 
+          status: 429, 
+          headers: { 'Retry-After': String(Math.ceil(rateLimitResult.retryAfterMs / 1000)) }
+        }
+      );
+    }
+
     const body = await request.json();
     const { email, companyName, role, teamSize, primaryUseCase, tools } = body;
 

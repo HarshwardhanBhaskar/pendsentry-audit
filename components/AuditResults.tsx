@@ -12,7 +12,8 @@ import {
   BadgePercent, 
   ShieldCheck,
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  Bell
 } from 'lucide-react';
 import { AuditReport, ToolAuditResult, AuditInput } from '../lib/auditEngine';
 import { PRICING_DATABASE, ToolName } from '../lib/pricingData';
@@ -36,6 +37,8 @@ export default function AuditResults({ report, formData, onReset }: AuditResults
   const [leadSaved, setLeadSaved] = useState<boolean>(false);
   const [copiedLink, setCopiedLink] = useState<boolean>(false);
   const [shareUrl, setShareUrl] = useState<string>('');
+  const [notifyEmail, setNotifyEmail] = useState<string>('');
+  const [notifySubmitted, setNotifySubmitted] = useState<boolean>(false);
 
   // Fetch AI personalized summary on result render
   useEffect(() => {
@@ -306,6 +309,80 @@ export default function AuditResults({ report, formData, onReset }: AuditResults
             <ArrowRight size={16} />
           </a>
         </div>
+      ) : report.totalMonthlySavings > 0 && report.totalMonthlySavings < 100 ? (
+        /* Low Savings: Be honest, validate + notify me signup */
+        <div style={{ 
+          padding: '32px', 
+          border: '1px solid rgba(255, 255, 255, 0.15)', 
+          backgroundColor: '#080808' 
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+            <ShieldCheck size={22} style={{ color: '#00e676' }} />
+            <h3 style={{ margin: 0, fontSize: '18px', color: '#ffffff', textTransform: 'uppercase' }}>
+              You&apos;re Spending Well
+            </h3>
+          </div>
+          <p style={{ margin: '0 0 20px 0', fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
+            Your AI stack is mostly optimized — we found only ${report.totalMonthlySavings.toFixed(0)}/mo in minor adjustments. Your spend efficiency is better than most startups at your scale. Subscribe below to get notified when new pricing changes or vendor discounts could impact your stack.
+          </p>
+          {!notifySubmitted ? (
+            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              <input 
+                type="email"
+                placeholder="your@email.com"
+                value={notifyEmail}
+                onChange={(e) => setNotifyEmail(e.target.value)}
+                aria-label="Email for optimization alerts"
+                style={{ flex: 1, minWidth: '200px', padding: '10px 14px', background: '#000000', border: '1px solid var(--border-color)', color: '#ffffff', fontSize: '13px' }}
+              />
+              <button
+                type="button"
+                className="btn btn-secondary"
+                style={{ padding: '10px 20px', gap: '6px' }}
+                onClick={() => {
+                  if (notifyEmail) {
+                    setNotifySubmitted(true);
+                  }
+                }}
+              >
+                <Bell size={14} />
+                <span>Notify Me</span>
+              </button>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 14px', border: '1px solid rgba(0,230,118,0.3)', background: 'rgba(0,230,118,0.05)' }}>
+              <Check size={16} style={{ color: '#00e676' }} />
+              <span style={{ fontSize: '13px', color: '#00e676', fontWeight: '600' }}>Subscribed! We&apos;ll notify you when new optimizations apply to your stack.</span>
+            </div>
+          )}
+        </div>
+      ) : report.totalMonthlySavings >= 100 && report.totalMonthlySavings < 500 ? (
+        /* Medium Savings: Show savings but no aggressive Credex push */
+        <div style={{ 
+          padding: '32px', 
+          border: '1px solid rgba(255, 255, 255, 0.15)', 
+          backgroundColor: 'rgba(0,230,118,0.02)' 
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+            <TrendingDown size={22} style={{ color: '#00e676' }} />
+            <h3 style={{ margin: 0, fontSize: '18px', color: '#00e676', textTransform: 'uppercase' }}>
+              Actionable Savings Identified
+            </h3>
+          </div>
+          <p style={{ margin: '0 0 20px 0', fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
+            We found ${report.totalMonthlySavings.toFixed(0)}/mo in optimization opportunities. Apply the recommendations above to tighten your AI spend. As your usage scales, Credex can help secure bulk credit discounts.
+          </p>
+          <a 
+            href="https://credex.rocks" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="btn btn-secondary"
+            style={{ textDecoration: 'none', display: 'inline-flex', gap: '8px' }}
+          >
+            <span>Learn About Credex Credits</span>
+            <ArrowRight size={14} />
+          </a>
+        </div>
       ) : report.totalMonthlySavings === 0 ? (
         /* Optimal Stack: Be honest, validate efficiency */
         <div style={{ 
@@ -319,9 +396,39 @@ export default function AuditResults({ report, formData, onReset }: AuditResults
               AI Infrastructure 100% Efficient
             </h3>
           </div>
-          <p style={{ margin: 0, fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
-            Your tech stack is fully lean and free of seat leakage. We prioritize arithmetic accuracy over artificial leads—your configuration outperforms **94% of audited startups** in your size tier.
+          <p style={{ margin: '0 0 20px 0', fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
+            Your tech stack is fully lean and free of seat leakage. We prioritize arithmetic accuracy over artificial leads — your configuration outperforms 94% of audited startups in your size tier.
           </p>
+          {!notifySubmitted ? (
+            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              <input 
+                type="email"
+                placeholder="your@email.com"
+                value={notifyEmail}
+                onChange={(e) => setNotifyEmail(e.target.value)}
+                aria-label="Email for optimization alerts"
+                style={{ flex: 1, minWidth: '200px', padding: '10px 14px', background: '#000000', border: '1px solid var(--border-color)', color: '#ffffff', fontSize: '13px' }}
+              />
+              <button
+                type="button"
+                className="btn btn-secondary"
+                style={{ padding: '10px 20px', gap: '6px' }}
+                onClick={() => {
+                  if (notifyEmail) {
+                    setNotifySubmitted(true);
+                  }
+                }}
+              >
+                <Bell size={14} />
+                <span>Notify Me When Savings Apply</span>
+              </button>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 14px', border: '1px solid rgba(0,230,118,0.3)', background: 'rgba(0,230,118,0.05)' }}>
+              <Check size={16} style={{ color: '#00e676' }} />
+              <span style={{ fontSize: '13px', color: '#00e676', fontWeight: '600' }}>Subscribed! We&apos;ll notify you when new optimizations apply to your stack.</span>
+            </div>
+          )}
         </div>
       ) : null}
 

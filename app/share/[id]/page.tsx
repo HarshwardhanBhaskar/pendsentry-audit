@@ -302,7 +302,7 @@ export default async function SharePage({ params }: PageProps) {
             </div>
 
             {/* DYNAMIC CREDEX DIRECT ADVERTISEMENT CARD */}
-            {report.totalMonthlySavings >= 300 ? (
+            {report.totalMonthlySavings >= 500 ? (
               <div style={{ padding: '32px', backgroundColor: 'rgba(0,230,118,0.03)', borderBottom: '1px solid var(--border-color)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
                   <div style={{ color: '#00e676' }}>
@@ -369,7 +369,7 @@ export default async function SharePage({ params }: PageProps) {
         <div className="wix-grid-cell" style={{ display: 'flex', flexDirection: 'column', gap: '14px', padding: '48px' }}>
           <h4 style={{ fontSize: '20px', textTransform: 'uppercase', margin: '0 0 8px 0', color: '#ffffff' }}>CREDEX</h4>
           <div style={{ fontSize: '14px', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <span>daku76919@gmail.com</span>
+            <span>hello@credex.rocks</span>
             <span>https://credex.rocks</span>
           </div>
         </div>

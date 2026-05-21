@@ -724,7 +724,7 @@ export default function Home() {
         <div className="wix-grid-cell" style={{ display: 'flex', flexDirection: 'column', gap: '14px', padding: '48px' }}>
           <h4 style={{ fontSize: '20px', textTransform: 'uppercase', margin: '0 0 8px 0', color: '#ffffff' }}>CREDEX</h4>
           <div style={{ fontSize: '14px', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <span>daku76919@gmail.com</span>
+            <span>hello@credex.rocks</span>
             <span>https://credex.rocks</span>
           </div>
         </div>
