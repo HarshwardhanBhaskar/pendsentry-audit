@@ -2,6 +2,21 @@
 
 SpendSentry is a premium, zero-login, self-reported AI spend audit tool built as a high-converting lead-generation asset for Credex. It allows startup founders, engineering managers, and finance professionals to input their active AI subscriptions and usage, receive an instant, mathematically defensible cost-savings report, capture an optimized PDF summary, and seamlessly book consultations to purchase discounted credits from Credex.
 
+**Live Deployment URL:** [https://spend-sentry-demo.vercel.app](https://spend-sentry-demo.vercel.app) *(Replace with actual Vercel URL upon deployment)*
+
+---
+
+## 🖼️ Application Previews
+
+### 1. Landing & Dashboard Mockup
+![Hero Landing Section](./public/screenshots/1-hero.png)
+
+### 2. Spend Input Form
+![Spend Input Form](./public/screenshots/2-form-1.png)
+
+### 3. Shareable Anonymized Blueprint
+![Share Page Blueprint](./public/screenshots/5-share-1.png)
+
 ---
 
 ## ⚡ Quick Start
