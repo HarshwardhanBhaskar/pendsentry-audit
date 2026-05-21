@@ -218,32 +218,37 @@ export function runSpendAudit(input: AuditInput): AuditReport {
     }
   }
 
-  // RULE F: Double Chat Overlap (ChatGPT Plus + Claude Pro for Coding/Writing use cases)
-  if (
-    chatgptUI &&
-    chatgptUI.enabled &&
-    chatgptUI.plan === 'plus' &&
-    claudeUI &&
-    claudeUI.enabled &&
-    claudeUI.plan === 'pro'
-  ) {
-    // If they have both, and they are coding or writing, they can consolidate models into Cursor Pro / Windsurf Pro!
-    // Or just consolidate into one primary chat tool
+  // RULE F: SaaS Chat Redundancy & Chat Consolidation Engine
+  if (chatgptUI && chatgptUI.enabled && claudeUI && claudeUI.enabled) {
     const claudeAud = breakdown.claude;
 
-    // We flag this on Claude Pro to avoid duplicate flagging on both tools
+    // We flag this on Claude to avoid duplicate flagging on ChatGPT
     if (claudeAud.monthlySavings === 0) {
-      const savings = claudeAud.currentSpend; // saving the full Claude Pro cost
+      const savings = claudeAud.currentSpend;
       claudeAud.optimizedSpend = 0;
       claudeAud.monthlySavings = savings;
       claudeAud.actionType = 'consolidate';
       claudeAud.recommendation = 'Consolidate Chat Accounts';
       
-      if (cursorUI && cursorUI.enabled && ['pro', 'business'].includes(cursorUI.plan)) {
-        claudeAud.reason = 'Your team pays for both ChatGPT Plus and Claude Pro alongside Cursor. Since Cursor Pro natively includes premium Claude 3.5 Sonnet and GPT-4o inside, you can cancel separate chat accounts and save $20/user/mo.';
+      const cursorActive = cursorUI && cursorUI.enabled && ['pro', 'business', 'enterprise'].includes(cursorUI.plan);
+      if (cursorActive) {
+        claudeAud.reason = `Your team pays for both ChatGPT and Claude.ai alongside Cursor. Since Cursor natively includes premium Claude 3.5 Sonnet and GPT-4o inside, you can cancel separate Claude.ai licenses and save $${savings}/mo.`;
       } else {
-        claudeAud.reason = 'Your team is paying $40/user/mo for separate ChatGPT Plus and Claude Pro subscriptions. Consolidating to a single chat subscription or upgrading to Cursor Pro saves you $20/user/mo.';
+        claudeAud.reason = `Your team pays for both ChatGPT and Claude.ai subscriptions simultaneously. We recommend consolidating all general AI chat workloads into a single primary platform to eliminate duplicate monthly fees and save $${savings}/mo.`;
       }
+    }
+  }
+
+  const geminiUI = tools.gemini;
+  if (geminiUI && geminiUI.enabled && ((chatgptUI && chatgptUI.enabled) || (claudeUI && claudeUI.enabled))) {
+    const geminiAud = breakdown.gemini;
+    if (geminiAud.monthlySavings === 0) {
+      const savings = geminiAud.currentSpend;
+      geminiAud.optimizedSpend = 0;
+      geminiAud.monthlySavings = savings;
+      geminiAud.actionType = 'consolidate';
+      geminiAud.recommendation = 'Consolidate Chat Accounts';
+      geminiAud.reason = `Your team pays for Gemini (Google AI) alongside separate ChatGPT or Claude.ai subscriptions simultaneously. We recommend consolidating all general AI chat workloads into a single primary platform to eliminate duplicate monthly fees and save $${savings}/mo.`;
     }
   }
 

@@ -117,30 +117,35 @@ export default function AuditForm({ formData, setFormData, onSubmit }: AuditForm
 
   const getUseCaseIcon = (useCase: PrimaryUseCase) => {
     switch (useCase) {
-      case 'coding': return <Code size={18} />;
-      case 'writing': return <FileText size={18} />;
-      case 'data': return <Database size={18} />;
-      case 'research': return <Search size={18} />;
-      case 'mixed': return <Layers size={18} />;
+      case 'coding': return <Code size={16} />;
+      case 'writing': return <FileText size={16} />;
+      case 'data': return <Database size={16} />;
+      case 'research': return <Search size={16} />;
+      case 'mixed': return <Layers size={16} />;
     }
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+      
       {/* Step 1: General Organization Info */}
-      <div className="glass-card" style={{ padding: '24px' }}>
-        <h3 style={{ margin: '0 0 16px 0', fontSize: '18px', display: 'flex', alignItems: 'center', gap: '10px', color: '#60a5fa' }}>
-          <Sparkles size={20} /> 1. Team & Core Workload
+      <div style={{ 
+        border: '1px solid var(--border-color)', 
+        padding: '28px',
+        backgroundColor: 'var(--bg-primary)'
+      }}>
+        <h3 style={{ margin: '0 0 20px 0', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px', color: '#ffffff', textTransform: 'uppercase' }}>
+          <Sparkles size={16} style={{ color: '#00e676' }} /> 1. Team Size & Core Workload
         </h3>
         
-        <div className="grid-2">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           {/* Team Size Slider */}
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-              <label htmlFor="team-size-input" style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Users size={16} /> Team Members Using AI
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+              <label htmlFor="team-size-input" style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '8px', color: '#a3a3a3', fontSize: '13px', fontWeight: '600', textTransform: 'uppercase' }}>
+                <Users size={14} style={{ color: '#00e676' }} /> Active Team Members
               </label>
-              <span style={{ fontSize: '15px', fontWeight: 'bold', color: '#60a5fa' }}>
+              <span style={{ fontSize: '16px', fontWeight: '800', color: '#00e676', fontFamily: 'var(--font-display)' }}>
                 {formData.teamSize} {formData.teamSize === 1 ? 'User' : 'Users'}
               </span>
             </div>
@@ -152,34 +157,43 @@ export default function AuditForm({ formData, setFormData, onSubmit }: AuditForm
               value={formData.teamSize}
               onChange={(e) => handleGeneralChange('teamSize', Number(e.target.value))}
             />
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>
-              <span>1</span>
-              <span>25</span>
-              <span>50</span>
-              <span>75</span>
-              <span>100+</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: 'var(--text-muted)', marginTop: '6px', fontFamily: 'var(--font-display)', fontWeight: '700' }}>
+              <span>1 SEAT</span>
+              <span>25 SEATS</span>
+              <span>50 SEATS</span>
+              <span>75 SEATS</span>
+              <span>100+ SEATS</span>
             </div>
           </div>
 
           {/* Primary Use Case Select */}
           <div>
-            <label htmlFor="usecase-select" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Terminal size={16} /> Primary AI Use Case
+            <label htmlFor="usecase-select" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#a3a3a3', fontSize: '13px', fontWeight: '600', textTransform: 'uppercase', marginBottom: '8px' }}>
+              <Terminal size={14} style={{ color: '#00e676' }} /> Primary Workload Scope
             </label>
             <div style={{ position: 'relative' }}>
               <select
                 id="usecase-select"
                 value={formData.primaryUseCase}
                 onChange={(e) => handleGeneralChange('primaryUseCase', e.target.value as PrimaryUseCase)}
-                style={{ width: '100%', appearance: 'none', paddingLeft: '40px' }}
+                style={{ 
+                  width: '100%', 
+                  appearance: 'none', 
+                  paddingLeft: '38px',
+                  backgroundColor: '#000000',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '4px',
+                  fontSize: '13px',
+                  color: '#ffffff'
+                }}
               >
-                <option value="coding">Software Engineering (Coding, Debugging, Scripting)</option>
-                <option value="writing">Content Writing (Marketing, Docs, Emails)</option>
-                <option value="data">Data Analysis (Analytics, Forecasting, Python)</option>
-                <option value="research">Academic Research & Intelligence Gathering</option>
-                <option value="mixed">General Mixed Purpose Productivity</option>
+                <option value="coding">Software Engineering (Coding, Autocomplete, CLI)</option>
+                <option value="writing">Content Generation (Copywriting, Marketing, Proposals)</option>
+                <option value="data">Data Analysis & Modeling (Python, SQL, R)</option>
+                <option value="research">Market Intelligence & Academic Research</option>
+                <option value="mixed">General Purpose Multi-Model Productivity</option>
               </select>
-              <div style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: '#60a5fa' }}>
+              <div style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: '#00e676', display: 'flex', alignItems: 'center' }}>
                 {getUseCaseIcon(formData.primaryUseCase)}
               </div>
             </div>
@@ -187,16 +201,20 @@ export default function AuditForm({ formData, setFormData, onSubmit }: AuditForm
         </div>
       </div>
 
-      {/* Step 2: Tools Breakdown selection */}
-      <div className="glass-card" style={{ padding: '24px' }}>
-        <h3 style={{ margin: '0 0 4px 0', fontSize: '18px', display: 'flex', alignItems: 'center', gap: '10px', color: '#34d399' }}>
-          <Zap size={20} /> 2. AI Subscriptions
+      {/* Step 2: Tools Breakdown Selection */}
+      <div style={{ 
+        border: '1px solid var(--border-color)', 
+        padding: '28px',
+        backgroundColor: 'var(--bg-primary)'
+      }}>
+        <h3 style={{ margin: '0 0 6px 0', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px', color: '#ffffff', textTransform: 'uppercase' }}>
+          <Zap size={16} style={{ color: '#00e676' }} /> 2. Paid AI Software Subscriptions
         </h3>
-        <p style={{ margin: '0 0 20px 0', fontSize: '13px', color: 'var(--text-secondary)' }}>
-          Toggle on the tools your team currently pays for and specify their active plan and seat count.
+        <p style={{ margin: '0 0 24px 0', fontSize: '13px', color: 'var(--text-secondary)' }}>
+          Toggle on the active subscriptions your company pays for to calculate optimized allocations.
         </p>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           {(Object.keys(PRICING_DATABASE) as ToolName[]).map((toolKey) => {
             const toolPricing = PRICING_DATABASE[toolKey];
             const isApi = toolKey.endsWith('_api');
@@ -205,19 +223,20 @@ export default function AuditForm({ formData, setFormData, onSubmit }: AuditForm
             return (
               <div 
                 key={toolKey} 
-                className="glass-card"
                 style={{ 
-                  padding: '16px',
-                  borderLeft: userVal.enabled ? `4px solid ${isApi ? '#f59e0b' : '#3b82f6'}` : '1px solid var(--border-glass)',
-                  background: userVal.enabled ? 'rgba(20, 22, 38, 0.7)' : 'rgba(20, 22, 38, 0.2)',
-                  transition: 'var(--transition-fast)'
+                  padding: '16px 20px',
+                  border: '1px solid var(--border-color)',
+                  borderLeft: userVal.enabled ? '3px solid var(--color-primary)' : '1px solid var(--border-color)',
+                  background: userVal.enabled ? '#080808' : '#000000',
+                  transition: 'var(--transition-fast)',
+                  borderRadius: '2px'
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                   
                   {/* Tool Header & Toggle Switch */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                    <label className="switch" style={{ margin: 0 }} aria-label={`Enable ${toolPricing.displayName}`}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                    <label className="switch" style={{ margin: 0 }} aria-label={`Toggle ${toolPricing.displayName}`}>
                       <input 
                         type="checkbox" 
                         checked={userVal.enabled}
@@ -226,11 +245,11 @@ export default function AuditForm({ formData, setFormData, onSubmit }: AuditForm
                       <span className="slider"></span>
                     </label>
                     <div>
-                      <h4 style={{ margin: 0, fontSize: '16px', color: userVal.enabled ? '#ffffff' : 'var(--text-secondary)' }}>
+                      <h4 style={{ margin: 0, fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', color: userVal.enabled ? '#ffffff' : 'var(--text-secondary)', letterSpacing: '0.02em' }}>
                         {toolPricing.displayName}
                       </h4>
-                      <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
-                        {isApi ? 'Usage-Based API' : 'Seat-based subscriptions'}
+                      <span style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.02em' }}>
+                        {isApi ? 'API ENDPOINT' : 'LICENSED SEATS'}
                       </span>
                     </div>
                   </div>
@@ -238,6 +257,7 @@ export default function AuditForm({ formData, setFormData, onSubmit }: AuditForm
                   {/* Form fields (Only visible if checked) */}
                   {userVal.enabled && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+                      
                       {/* Plan Dropdown Selection */}
                       {!isApi && (
                         <div>
@@ -245,7 +265,14 @@ export default function AuditForm({ formData, setFormData, onSubmit }: AuditForm
                             aria-label={`${toolPricing.displayName} Plan`}
                             value={userVal.plan}
                             onChange={(e) => handleToolPlanChange(toolKey, e.target.value)}
-                            style={{ padding: '6px 12px', fontSize: '13px' }}
+                            style={{ 
+                              padding: '6px 12px', 
+                              fontSize: '12px',
+                              backgroundColor: '#000000',
+                              border: '1px solid var(--border-color)',
+                              borderRadius: '2px',
+                              color: '#ffffff'
+                            }}
                           >
                             {Object.entries(toolPricing.plans).map(([k, p]) => (
                               <option key={k} value={k}>
@@ -259,22 +286,30 @@ export default function AuditForm({ formData, setFormData, onSubmit }: AuditForm
                       {/* Numeric values (Seats or CustomSpend) */}
                       {isApi ? (
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <label htmlFor={`${toolKey}-spend`} style={{ margin: 0, fontSize: '13px' }}>Monthly Spend:</label>
+                          <label htmlFor={`${toolKey}-spend`} style={{ margin: 0, fontSize: '12px', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase' }}>Monthly Burn:</label>
                           <div style={{ position: 'relative' }}>
-                            <span style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', fontSize: '13px', color: '#60a5fa' }}>$</span>
+                            <span style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', fontSize: '12px', color: '#00e676', fontWeight: 'bold' }}>$</span>
                             <input 
                               id={`${toolKey}-spend`}
                               type="number" 
                               min="0"
                               value={userVal.customSpend || 0}
                               onChange={(e) => handleToolNumericChange(toolKey, 'customSpend', Number(e.target.value))}
-                              style={{ width: '100px', padding: '6px 10px 6px 20px', fontSize: '13px' }}
+                              style={{ 
+                                width: '90px', 
+                                padding: '6px 10px 6px 20px', 
+                                fontSize: '12px',
+                                backgroundColor: '#000000',
+                                border: '1px solid var(--border-color)',
+                                borderRadius: '2px',
+                                color: '#ffffff'
+                              }}
                             />
                           </div>
                         </div>
                       ) : (
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <label htmlFor={`${toolKey}-seats`} style={{ margin: 0, fontSize: '13px' }}>Seats:</label>
+                          <label htmlFor={`${toolKey}-seats`} style={{ margin: 0, fontSize: '12px', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase' }}>Seats:</label>
                           <input 
                             id={`${toolKey}-seats`}
                             type="number" 
@@ -282,7 +317,15 @@ export default function AuditForm({ formData, setFormData, onSubmit }: AuditForm
                             max="500"
                             value={userVal.seats}
                             onChange={(e) => handleToolNumericChange(toolKey, 'seats', Number(e.target.value))}
-                            style={{ width: '70px', padding: '6px 10px', fontSize: '13px' }}
+                            style={{ 
+                              width: '64px', 
+                              padding: '6px 10px', 
+                              fontSize: '12px',
+                              backgroundColor: '#000000',
+                              border: '1px solid var(--border-color)',
+                              borderRadius: '2px',
+                              color: '#ffffff'
+                            }}
                           />
                         </div>
                       )}
@@ -301,10 +344,19 @@ export default function AuditForm({ formData, setFormData, onSubmit }: AuditForm
         type="button"
         onClick={onSubmit}
         className="btn btn-primary"
-        style={{ width: '100%', padding: '14px 20px', fontSize: '16px', borderRadius: '10px' }}
+        style={{ 
+          width: '100%', 
+          padding: '16px 24px', 
+          fontSize: '15px', 
+          borderRadius: '9999px',
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em',
+          fontWeight: '800'
+        }}
       >
-        <Sparkles size={18} /> Calculate AI Cost Savings
+        <Sparkles size={16} /> Run Cost Savings calculations
       </button>
+
     </div>
   );
 }

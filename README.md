@@ -44,6 +44,43 @@ npm run test
 
 ---
 
+## 📐 System Architecture
+
+SpendSentry operates as a serverless-hybrid web application. Below is the Mermaid architectural diagram mapping our data boundaries and third-party integrations:
+
+```mermaid
+graph TD
+    %% User & Client Interface
+    User((Startup Builder)) -->|Interacts with| Client[Next.js Client SPA]
+    
+    %% Local Client Boundary
+    subgraph Client-Side Context
+        Client -->|Persists Form State| LocalStore[(Browser LocalStorage)]
+        Client -->|Calculates UI Previews| AuditEng[Audit Engine Logic]
+    end
+
+    %% Next.js API Routes (Server Boundary)
+    subgraph Next.js Serverless Environment
+        Client -->|POST /api/audit| AuditRoute[Audit Submission API]
+        Client -->|POST /api/summary| AISummaryRoute[AI Summary API]
+        Client -->|POST /api/email| EmailRoute[Transactional Email API]
+    end
+
+    %% Persistence & Third Party APIs
+    subgraph Infrastructure Layer
+        AuditRoute -->|Inserts Lead + Audit| SupaDB[(Supabase Postgres)]
+        AISummaryRoute -->|Generates summary| Anthropic[Anthropic API / Claude 3.5]
+        EmailRoute -->|Triggers SMTP / JSON| ResendAPI[Resend Transactional Email]
+    end
+
+    %% Viral Public Share Flow
+    PublicUser((Hacker News / X Guest)) -->|Requests Share URL| ShareRoute[Share Page Route /share/id]
+    ShareRoute -->|Fetches Data| SupaDB
+    ShareRoute -->|Generates Dynamic OG Tags| WebCrawler[Search/Social Crawlers]
+```
+
+---
+
 ## 🚀 Deployment
 
 SpendSentry is fully optimized for single-click deployment on **Vercel** or **Netlify**:
