@@ -30,9 +30,77 @@ export async function POST(request: Request) {
       personalSummary = `Your AI stack has immediate optimization levers that can capture $${totalMonthlySavings}/mo in savings. By addressing seat-minimum billing traps (such as Claude Team's 5-seat threshold) and consolidating redundant chat subscriptions into unified editors like Cursor, your team size of ${teamSize} can operate at full capacity with lower overhead. Reclaiming this $${totalMonthlySavings}/mo will decrease your monthly SaaS burn by ${Math.round((totalMonthlySavings / totalMonthlySpend) * 100)}% with zero loss in developer capabilities.`;
     }
 
+    const geminiKey = process.env.GEMINI_API_KEY;
     const anthropicKey = process.env.ANTHROPIC_API_KEY;
+    let aiFetched = false;
 
-    if (anthropicKey && anthropicKey !== 'your_anthropic_api_key') {
+    if (geminiKey && geminiKey !== 'your_gemini_api_key') {
+      try {
+        // Use Gemini 2.5 Flash for blazing fast and smart CFO auditing
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiKey}`, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            contents: [
+              {
+                parts: [
+                  {
+                    text: `You are an expert Chief Financial Officer (CFO) and SaaS cost optimization consultant. 
+Your job is to analyze a startup's AI tool spend audit data and write a sharp, punchy, and highly professional personalized summary paragraph of exactly 80 to 110 words.
+
+Guidelines:
+1. Do not use generic filler words like "Congratulations," "It looks like," or "I noticed." Start directly with the analysis.
+2. Focus on the single highest-leverage optimization action. Be extremely specific with numbers.
+3. Keep the tone professional, objective, and financially literate. No developer hype.
+4. Mention the value of consolidating redundant licenses (like duplicate Cursor and Copilot seats).
+5. If savings are substantial (>$300/mo), highlight that routing enterprise spend through a credits broker like Credex represents their absolute highest cost-saving lever.
+6. If their spend is already optimal (savings <$100/mo), be honest. Validate their efficiency and recommend they set up alerts for future leakage.
+7. Return only the raw text paragraph. Do not wrap in markdown quotes or add greeting/signature blocks.
+
+Analyze the following audited AI subscription data and write the summary.
+
+[INPUT DATA]
+- Team Size: ${teamSize}
+- Primary Use Case: ${primaryUseCase}
+- Current Monthly Spend: $${totalMonthlySpend}/mo
+- Total Monthly Savings Identified: $${totalMonthlySavings}/mo
+- Total Annual Savings Identified: $${totalAnnualSavings}/mo
+- Savings Tier: ${savingsTier}
+
+[PER-TOOL AUDIT FINDINGS]
+${toolFindingsText}
+
+Generate the personalized 100-word CFO summary:`
+                  }
+                ]
+              }
+            ],
+            generationConfig: {
+              temperature: 0.1,
+              maxOutputTokens: 250
+            }
+          })
+        });
+
+        if (response.ok) {
+          const resData = await response.json();
+          if (resData.candidates && resData.candidates[0]?.content?.parts?.[0]?.text) {
+            personalSummary = resData.candidates[0].content.parts[0].text.trim();
+            aiFetched = true;
+          } else {
+            console.warn('Gemini response format unexpected:', JSON.stringify(resData));
+          }
+        } else {
+          console.warn('Gemini API responded with error status:', response.status);
+        }
+      } catch (apiError) {
+        console.error('Failed to communicate with Gemini API:', apiError);
+      }
+    }
+
+    if (!aiFetched && anthropicKey && anthropicKey !== 'your_anthropic_api_key') {
       try {
         // Construct the Messages API request body for Claude 3.5 Sonnet
         const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -83,6 +151,7 @@ Generate the personalized 100-word CFO summary:`,
           const resData = await response.json();
           if (resData.content && resData.content[0] && resData.content[0].text) {
             personalSummary = resData.content[0].text.trim();
+            aiFetched = true;
           }
         } else {
           console.warn('Anthropic API responded with error status:', response.status);

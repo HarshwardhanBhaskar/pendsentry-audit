@@ -38,7 +38,10 @@ NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 
-# Anthropic API Configuration (For personalized summary)
+# Gemini API Configuration (For personalized summary, primary)
+GEMINI_API_KEY=your_gemini_api_key
+
+# Anthropic API Configuration (For personalized summary, fallback)
 ANTHROPIC_API_KEY=your_anthropic_api_key
 
 # Resend API Configuration (For transactional email)

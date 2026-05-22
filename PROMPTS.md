@@ -6,9 +6,9 @@ This document details the exact system and user prompts used to drive the AI-gen
 
 ## 1. The Active Production Prompt
 
-Our Next.js serverless route `/api/summary` calls the Anthropic API (targeting `claude-3-5-sonnet`) with a highly structured prompt. It is fed the raw, audited data and outputs a professional, concise summary.
+Our Next.js serverless route `/api/summary` supports both **Google Gemini API** (targeting `gemini-2.5-flash` as primary) and **Anthropic API** (targeting `claude-3-5-sonnet` as fallback) with a highly structured prompt. It dynamically executes the prompt using whichever key is configured in the environment, outputting a professional, concise summary based on the raw, deterministic audited data.
 
-### A. System Prompt
+### A. System Instructions / Main Prompt
 ```
 You are an expert Chief Financial Officer (CFO) and SaaS cost optimization consultant. 
 Your job is to analyze a startup's AI tool spend audit data and write a sharp, punchy, and highly professional personalized summary paragraph of exactly 80 to 110 words.
