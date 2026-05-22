@@ -1,7 +1,5 @@
 # SpendSentry — AI Spend Auditor by Credex
 
-> **Designed & Engineered with ❤️ by [Harshwardhan Bhaskar](https://github.com/HarshwardhanBhaskar)** for HB Technologies. Sponsored by Credex.
-
 SpendSentry is a premium, zero-login, self-reported AI spend audit tool built as a high-converting lead-generation asset for Credex. It allows startup founders, engineering managers, and finance professionals to input their active AI subscriptions and usage, receive an instant, mathematically defensible cost-savings report, capture an optimized PDF summary, and seamlessly book consultations to purchase discounted credits from Credex.
 
 **Live Deployment URL:** [https://pendsentry-audit.vercel.app](https://pendsentry-audit.vercel.app)
@@ -135,3 +133,10 @@ Here are 5 critical technical and product trade-offs made during the SpendSentry
 ### 5. Honeypot + Rate-Limiting vs. hCaptcha Friction
 - **Trade-off:** Requiring a standard hCaptcha or reCAPTCHA on our lead capture form provides robust protection against bot spamming.
 - **Decision:** We chose a **silent honeypot field combined with server-side IP rate-limiting**. Standard captchas introduce severe user experience friction, drastically lowering lead capture rates. Startup founders are highly impatient. By using a hidden form field (honeypot) that bots automatically fill in, alongside a Next.js server-side rate limit on submission attempts per IP, we maintain high security while keeping the conversion funnel completely frictionless.
+
+---
+
+<p align="center">
+  <b>Designed & Engineered with ❤️ by <a href="https://github.com/HarshwardhanBhaskar">Harshwardhan Bhaskar</a></b> for HB Technologies.<br/>
+  <i>Sponsored by Credex. Sourcing surplus corporate tech credits.</i>
+</p>
