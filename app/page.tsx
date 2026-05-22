@@ -648,7 +648,7 @@ export default function Home() {
             },
             {
               q: "How is my email and data handled? Is my audit public?",
-              a: "We maintain rigorous isolation logs. When you share an audit report, all identifying credentials (company name, email) are stripped from the shared payload, creating a secure, aggregate statistics page."
+              a: "Your privacy is our highest priority. The public shareable URL (pendsentry-audit.vercel.app/share/[id]) strips away all identifying details like your company name, email, or team member roles, displaying only the aggregate tool count and savings breakdown. Your raw data is stored securely in our private Postgres backend, and we will never sell or share your email address."
             },
             {
               q: "How is Credex able to offer bulk discounts?",
