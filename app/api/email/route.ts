@@ -55,8 +55,9 @@ export async function POST(request: Request) {
     if (resendKey && resendKey !== 'your_resend_api_key') {
       try {
         const resend = new Resend(resendKey);
+        const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
         const { data, error } = await resend.emails.send({
-          from: 'SpendSentry <audits@spendsentry.com>', // Note: in sandbox mode, Resend sends from onboarding@resend.dev
+          from: fromEmail,
           to: email,
           subject: `Your AI Spend Audit Report — $${totalMonthlySavings}/mo in savings identified`,
           html: emailHtml,
