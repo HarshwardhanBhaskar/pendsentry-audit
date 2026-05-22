@@ -79,11 +79,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       type: 'website',
-      url: `https://spend-sentry-demo.vercel.app/share/${id}`,
+      url: `https://pendsentry-audit.vercel.app/share/${id}`,
       siteName: 'SpendSentry',
       images: [
         {
-          url: 'https://spend-sentry-demo.vercel.app/og-card.png',
+          url: 'https://pendsentry-audit.vercel.app/og-card.png',
           width: 1200,
           height: 630,
           alt: 'SpendSentry - Automated AI Subscription Auditor'
@@ -94,7 +94,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: 'summary_large_image',
       title,
       description,
-      images: ['https://spend-sentry-demo.vercel.app/og-card.png'],
+      images: ['https://pendsentry-audit.vercel.app/og-card.png'],
       creator: '@Credex'
     }
   };

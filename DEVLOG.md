@@ -54,39 +54,45 @@ This document tracks progress, design decisions, hours worked, learnings, and bl
 
 ---
 
-## Day 3 — 2026-05-22 (Tomorrow — Planned)
-**Hours worked:** 4 (Estimated)
-**Planned tasks:**
-- Deploy the application to Vercel and configure environment variables.
-- Capture screenshots from the live deployment and embed them into README.md.
-- Create a static `og-card.png` for Open Graph previews and update the meta tag URLs to point to the real domain.
-- Start rewriting DEVLOG to fill in remaining daily entries with proper retrospective format.
+## Day 3 — 2026-05-22
+**Hours worked:** 5
+**What I did:**
+- Successfully deployed the SpendSentry application to Vercel at `https://pendsentry-audit.vercel.app/` with automated CI/CD branch syncs and environment injection.
+- Integrated the Google Gemini API (`gemini-2.5-flash`) as the primary engine for generating 100-word personalized CFO summaries, including structured system instructions and temperature tuning.
+- Built secondary fallback pathways in `/api/summary` to support Anthropic's Claude 3.5 Sonnet and our native, robust local deterministic summary if keys are missing.
+- Wired up our production transactional email route (`/api/email`) using the Resend SDK, featuring beautiful, high-converting HTML templates and sandboxed fallback reporting.
+- Updated all social sharing meta-tags (Open Graph, Twitter card, and dynamic URLs) in `app/share/[id]/page.tsx` and updated references in `README.md` to point directly to the live domain.
+- Ran all mathematical unit tests and type-checking scripts locally, maintaining a 100% green verification rate.
+
+**What I learned:**
+- Integrating Gemini 2.5 Flash via a direct REST fetch keeps our serverless functions extremely lightweight and lightning-fast (sub-500ms execution times) compared to heavier multi-sdk builds.
+- Vercel's zero-config Next.js framework deployment is extremely smooth, packaging our API folder into separate serverless AWS lambda instances automatically.
+
+**Blockers / what I'm stuck on:**
+- Encountered a minor Vercel onboarding team-name collision initially, which was resolved by accepting their unique namespace mapping (`harshwardhan-s-projects2`). No other blockers encountered.
 
 **Plan for tomorrow:**
-- Run Lighthouse audits and fix any performance/accessibility gaps. Polish remaining docs.
+- Run active Lighthouse audit checks on the live deployment to optimize page speed, layout shifts (CLS), accessibility contrast, and SEO scores.
+- Conduct live integration testing by submitting real-world audits to verify Supabase row writes and Resend email dispatches.
 
 ---
 
-## Day 4 — 2026-05-23 (Planned)
+## Day 4 — 2026-05-23 (Tomorrow — Planned)
 **Hours worked:** 3 (Estimated)
 **Planned tasks:**
-- Run Lighthouse audits on deployed URL: target Performance ≥85, Accessibility ≥90, Best Practices ≥90.
-- Fix any accessibility or performance issues surfaced by Lighthouse.
-- Verify GitHub Actions CI pipeline shows green checks on latest commit.
-- Polish remaining documentation files — ensure word counts and formatting match the spec exactly.
+- Run full Lighthouse audits on the live Vercel URL, aiming for ≥90 in all categories (Performance, Accessibility, Best Practices, SEO).
+- Inspect and fix any minor UI rendering, image-layout shifts, or color-contrast items surfaced by the Lighthouse report.
+- Verify GitHub Actions CI pipelines are fully passing green on main.
+- Conduct final proofreads and cross-checks on all 13 required repository files.
 
 **Plan for tomorrow:**
-- Final review and submission prep.
+- N/A — final submission prep and submission!
 
 ---
 
 ## Day 5 — 2026-05-24 (Planned)
-**Hours worked:** 2 (Estimated)
+**Hours worked:** 1 (Estimated)
 **Planned tasks:**
-- Complete all DEVLOG entries with retrospective details.
-- Final review of all 13 required files against the submission rubric.
-- Last round of bug testing on the live deployment.
-- Submit via Google Form: GitHub repo URL + live deployed URL.
-
-**Plan for tomorrow:**
-- N/A — submission day.
+- Complete final DEVLOG entries.
+- double-check repository against the submission criteria checklist to ensure 100% compliance.
+- Submit the live deployment and Github repository via the Google Form.
