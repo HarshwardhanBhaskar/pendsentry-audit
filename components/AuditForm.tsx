@@ -197,6 +197,9 @@ export default function AuditForm({ formData, setFormData, onSubmit }: AuditForm
                 {getUseCaseIcon(formData.primaryUseCase)}
               </div>
             </div>
+            <p style={{ margin: '8px 0 0 0', fontSize: '11px', color: 'var(--text-muted)', lineHeight: '1.4' }}>
+              ℹ️ Your primary workload selection auto-calibrates custom audit priorities (e.g., prioritizing editor-level double-paying checks for coding, and account consolidation for mixed workflows).
+            </p>
           </div>
         </div>
       </div>
