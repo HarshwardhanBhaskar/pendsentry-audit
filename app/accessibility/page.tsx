@@ -202,7 +202,7 @@ export default function AccessibilityStatement() {
           
           {/* Section 1 */}
           <div className="liquid-glass" style={{ padding: '40px', borderRadius: '16px' }}>
-            <span style={{ fontSize: '11px', fontWeight: '800', color: '#00e676', tracking: '0.1em', uppercase: 'true', display: 'block', marginBottom: '12px', fontFamily: 'var(--font-display)' }}>
+            <span style={{ fontSize: '11px', fontWeight: '800', color: '#00e676', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'block', marginBottom: '12px', fontFamily: 'var(--font-display)' }}>
               SECTION 1
             </span>
             <h2 style={{ fontSize: '28px', fontFamily: "'Instrument Serif', serif", fontWeight: '400', margin: '0 0 16px 0', color: '#ffffff' }}>
@@ -215,7 +215,7 @@ export default function AccessibilityStatement() {
 
           {/* Section 2 */}
           <div className="liquid-glass" style={{ padding: '40px', borderRadius: '16px' }}>
-            <span style={{ fontSize: '11px', fontWeight: '800', color: '#00e676', tracking: '0.1em', uppercase: 'true', display: 'block', marginBottom: '12px', fontFamily: 'var(--font-display)' }}>
+            <span style={{ fontSize: '11px', fontWeight: '800', color: '#00e676', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'block', marginBottom: '12px', fontFamily: 'var(--font-display)' }}>
               SECTION 2
             </span>
             <h2 style={{ fontSize: '28px', fontFamily: "'Instrument Serif', serif", fontWeight: '400', margin: '0 0 16px 0', color: '#ffffff' }}>
@@ -228,7 +228,7 @@ export default function AccessibilityStatement() {
 
           {/* Section 3 */}
           <div className="liquid-glass" style={{ padding: '40px', borderRadius: '16px' }}>
-            <span style={{ fontSize: '11px', fontWeight: '800', color: '#00e676', tracking: '0.1em', uppercase: 'true', display: 'block', marginBottom: '12px', fontFamily: 'var(--font-display)' }}>
+            <span style={{ fontSize: '11px', fontWeight: '800', color: '#00e676', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'block', marginBottom: '12px', fontFamily: 'var(--font-display)' }}>
               SECTION 3
             </span>
             <h2 style={{ fontSize: '28px', fontFamily: "'Instrument Serif', serif", fontWeight: '400', margin: '0 0 16px 0', color: '#ffffff' }}>
@@ -242,7 +242,7 @@ export default function AccessibilityStatement() {
           {/* Section 4 */}
           <div className="liquid-glass" style={{ padding: '40px', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <div>
-              <span style={{ fontSize: '11px', fontWeight: '800', color: '#00e676', tracking: '0.1em', uppercase: 'true', display: 'block', marginBottom: '12px', fontFamily: 'var(--font-display)' }}>
+              <span style={{ fontSize: '11px', fontWeight: '800', color: '#00e676', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'block', marginBottom: '12px', fontFamily: 'var(--font-display)' }}>
                 CONTACT & IMPROVEMENTS
               </span>
               <h2 style={{ fontSize: '28px', fontFamily: "'Instrument Serif', serif", fontWeight: '400', margin: '0 0 16px 0', color: '#ffffff' }}>
