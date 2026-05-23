@@ -254,7 +254,7 @@ export default function PrivacyPolicy() {
                 Secure Data then <em style={{ fontStyle: 'italic', color: 'rgba(255,255,255,0.6)' }}>Control</em>
               </h2>
               <p style={{ fontSize: '14px', lineHeight: '1.75', color: 'var(--text-secondary)' }}>
-                You maintain complete authority over your lead information. To query your records, request manual record deletion, or discuss our sponsor Credex's credits integration, contact our privacy engineering team directly:
+                You maintain complete authority over your lead information. To query your records, request manual record deletion, or discuss our sponsor Credex&apos;s credits integration, contact our privacy engineering team directly:
               </p>
             </div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', color: '#00e676', fontWeight: '800', fontSize: '15px' }}>
