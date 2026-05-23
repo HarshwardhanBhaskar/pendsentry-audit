@@ -3,6 +3,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 
 import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { 
   ShieldCheck, 
   Lock,
@@ -741,9 +742,9 @@ export default function Home() {
         {/* Foot Col 3: Social & Copyright */}
         <div className="wix-grid-cell" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '48px', minHeight: '160px' }}>
           <div style={{ display: 'flex', gap: '16px', fontSize: '13px' }}>
-            <a href="#" style={{ color: '#ffffff', textDecoration: 'none' }} className="hover:underline">Privacy Policy</a>
+            <Link href="/privacy" style={{ color: '#ffffff', textDecoration: 'none' }} className="hover:underline">Privacy Policy</Link>
             <span style={{ color: 'rgba(255,255,255,0.15)' }}>|</span>
-            <a href="#" style={{ color: '#ffffff', textDecoration: 'none' }} className="hover:underline">Accessibility Statement</a>
+            <Link href="/accessibility" style={{ color: '#ffffff', textDecoration: 'none' }} className="hover:underline">Accessibility Statement</Link>
           </div>
           <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '24px' }}>
             © 2026 SpendSentry. Built by HB Technologies. Sponsored by Credex. Sourcing surplus corporate credits.
