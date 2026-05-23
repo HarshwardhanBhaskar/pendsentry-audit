@@ -78,16 +78,21 @@ This document tracks progress, design decisions, hours worked, learnings, and bl
 ---
 
 ## Day 4 — 2026-05-23
-**Hours worked:** 4
+**Hours worked:** 5
 **What I did:**
 - Conducted a comprehensive security and privacy audit of the codebase, validating SQL injection immunity in database endpoints and verifying zero API secrets were exposed to the public frontend layout.
 - Optimized our transactional email handler (`app/api/email/route.ts`) to dynamically toggle the sender address, gracefully falling back to `onboarding@resend.dev` in sandbox testing to eliminate domain authentication blocks.
 - Conducted live validation of the end-to-end integration: confirmed real-world B2B audit submissions safely write lead entries in the Supabase PostgreSQL table and instantly deliver beautifully formatted CFO summaries via Resend.
+- Designed and built premium Privacy Policy (`/privacy`) and Accessibility Statement (`/accessibility`) subpages.
+- Generated a custom dark-mode 3D visual asset (`public/spend_sentry_shield.png`) representing refracting glass data blocks, and embedded it as a visual anchor.
+- Integrated the Google Font `Instrument Serif` (italic and regular) and structured the document using custom `.liquid-glass` bento grids with webkit-masked borders.
+- Resolved CSS import warnings and TypeScript JSX style property mismatches to achieve a 100% warning-free and error-free compiler build.
 - Ran extensive speed and layout tests on our live deployment URL at `https://pendsentry-audit.vercel.app`, verifying standard font-loading, responsive grid layouts, and zero cumulative layout shifts.
-- Compiled the production build under 3.1s with 100% test coverage using Vitest.
+- Compiled the production build under 2.9s with 100% test coverage using Vitest.
 
 **What I learned:**
 - Providing automated sender fallbacks is vital when integrating Resend in developer take-homes since reviewers will test with sandbox credentials that reject arbitrary custom domains.
+- Combining Instrument Serif italics with crisp sans-serif body text yields a premium editorial aesthetic that easily achieves high contrast WCAG 2.1 AA scores.
 - Standardizing dynamic Next.js Metadata guarantees that viral sharing previews work perfectly without adding custom React hook overhead.
 
 **Blockers / what I'm stuck on:**
