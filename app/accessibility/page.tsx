@@ -6,16 +6,29 @@ import Link from 'next/link';
 
 export default function AccessibilityStatement() {
   return (
-    <div style={{ backgroundColor: '#000000', minHeight: '100vh', display: 'flex', flexDirection: 'column', color: '#ffffff' }}>
+    <div style={{ backgroundColor: '#000000', minHeight: '100vh', display: 'flex', flexDirection: 'column', color: '#ffffff', overflowX: 'hidden' }}>
       
+      {/* Dynamic ambient background glow */}
+      <div style={{ 
+        position: 'absolute',
+        top: 0,
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '100%',
+        maxWidth: '1200px',
+        height: '600px',
+        background: 'radial-gradient(circle at top, rgba(0, 230, 118, 0.035) 0%, transparent 70%)',
+        pointerEvents: 'none',
+        zIndex: 0
+      }} />
+
       {/* Navigation */}
       <nav style={{ 
-        borderBottom: '1px solid var(--border-color)', 
         padding: '24px 40px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#000000',
+        backgroundColor: 'transparent',
         zIndex: 50,
         position: 'sticky',
         top: 0
@@ -34,155 +47,216 @@ export default function AccessibilityStatement() {
         <div>
           <Link 
             href="/" 
+            className="liquid-glass"
             style={{ 
               fontSize: '12px', 
-              color: '#000000', 
-              backgroundColor: '#00e676',
+              color: '#ffffff', 
               textDecoration: 'none', 
               fontWeight: '700', 
-              padding: '8px 18px',
+              padding: '10px 20px',
               borderRadius: '9999px',
               letterSpacing: '0.02em',
               display: 'flex',
               alignItems: 'center',
-              gap: '6px',
-              transition: 'background-color 0.2s'
+              gap: '8px',
+              transition: 'background-color 0.2s',
+              border: 'none'
             }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#00ff80'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#00e676'}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.05)'}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
           >
-            <ArrowLeft size={14} />
+            <ArrowLeft size={14} style={{ color: '#00e676' }} />
             <span>Back to Audit</span>
           </Link>
         </div>
       </nav>
 
       {/* Main Content Area */}
-      <main style={{ flex: 1, padding: '80px 24px', maxWidth: '900px', margin: '0 auto', width: '100%' }}>
+      <main style={{ flex: 1, padding: '80px 24px 120px 24px', maxWidth: '1000px', margin: '0 auto', width: '100%', zIndex: 10, position: 'relative' }}>
         
-        {/* Header Block */}
-        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-          <span style={{ fontSize: '12px', fontWeight: '800', color: '#00e676', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '16px', display: 'block' }}>
-            Inclusive Web Commitment
-          </span>
-          <h1 style={{ fontSize: '48px', fontWeight: '800', fontFamily: 'var(--font-display)', letterSpacing: '-0.03em', margin: '0 0 16px 0', textTransform: 'uppercase' }}>
-            Accessibility
-          </h1>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '15px', maxWidth: '600px', margin: '0 auto', lineHeight: '1.6' }}>
-            SpendSentry is built with digital inclusivity at its core. We strive to provide a fully accessible financial auditing tool for all builders.
-          </p>
-          <div style={{ color: 'var(--text-muted)', fontSize: '12px', marginTop: '24px', fontFamily: 'var(--font-display)', fontWeight: '700' }}>
-            LAST UPDATED: MAY 23, 2026
-          </div>
-        </div>
-
-        {/* Highlight Card */}
-        <div className="glass-card" style={{ 
-          border: '1px solid var(--border-color)', 
-          padding: '32px', 
-          backgroundColor: 'var(--bg-primary)',
-          borderRadius: '4px',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: '24px',
-          marginBottom: '60px'
-        }}>
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <div style={{ color: '#00e676', marginTop: '4px' }}>
-              <Eye size={24} />
-            </div>
-            <div>
-              <h3 style={{ fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', margin: '0 0 6px 0', color: '#ffffff' }}>High Contrast</h3>
-              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.5' }}>Color specifications satisfy the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA threshold ratios.</p>
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <div style={{ color: '#00e676', marginTop: '4px' }}>
-              <Accessibility size={24} />
-            </div>
-            <div>
-              <h3 style={{ fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', margin: '0 0 6px 0', color: '#ffffff' }}>Keyboard Navigation</h3>
-              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.5' }}>All interactive sliders, checkmarks, inputs, and triggers support standard tab key focusing.</p>
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <div style={{ color: '#00e676', marginTop: '4px' }}>
-              <CheckCircle2 size={24} />
-            </div>
-            <div>
-              <h3 style={{ fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', margin: '0 0 6px 0', color: '#ffffff' }}>Semantic Layout</h3>
-              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.5' }}>Structured using standard semantic tags with explicit aria declarations for assistive screen readers.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Text Document Block */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', lineHeight: '1.8', fontSize: '15px', color: 'var(--text-secondary)' }}>
+        {/* Header Block with visual icon */}
+        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
           
-          <section>
-            <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#ffffff', textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '0.02em', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '8px' }}>
-              1. Our Commitment
-            </h2>
-            <p>
-              HB Technologies and Credex are committed to ensuring digital accessibility for people with disabilities. We continually apply relevant accessibility standards to improve the user experience for everyone, making sure that financial audit reports are accessible to all startup team members.
-            </p>
-          </section>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
+            <div className="liquid-glass" style={{ 
+              borderRadius: '9999px', 
+              width: '64px', 
+              height: '64px', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              color: '#00e676'
+            }}>
+              <Accessibility size={28} />
+            </div>
+          </div>
 
-          <section>
-            <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#ffffff', textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '0.02em', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '8px' }}>
-              2. Conformance Status
-            </h2>
-            <p>
-              The Web Content Accessibility Guidelines (WCAG) defines requirements for designers and developers to improve accessibility for people with disabilities. It defines three levels of conformance: Level A, Level AA, and Level AAA. 
-            </p>
-            <p style={{ marginTop: '12px' }}>
-              SpendSentry is **fully conformant with WCAG 2.1 Level AA standards**. Every page layout, input field, and savings visualization chart has been calibrated to align with Level AA requirements.
-            </p>
-          </section>
+          <span style={{ fontSize: '13px', fontWeight: '800', color: '#00e676', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '16px', display: 'block', fontFamily: 'var(--font-display)' }}>
+            Inclusive Web Statement
+          </span>
+          
+          <h1 style={{ 
+            fontSize: '64px', 
+            fontWeight: '400', 
+            fontFamily: "'Instrument Serif', serif", 
+            letterSpacing: '-0.02em', 
+            margin: '0 0 16px 0', 
+            color: '#ffffff',
+            lineHeight: '1.05'
+          }}>
+            Accessibility then <em style={{ fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', color: 'rgba(255, 255, 255, 0.65)' }}>Standard</em>
+          </h1>
+          
+          <p style={{ color: 'var(--text-secondary)', fontSize: '16px', maxWidth: '640px', margin: '0 auto', lineHeight: '1.6' }}>
+            We design experiences that prioritize clarity, support assistive inputs, and maintain elite visual legibility for all members of the startup ecosystem.
+          </p>
+          <div style={{ color: 'var(--text-muted)', fontSize: '11px', marginTop: '24px', fontFamily: 'var(--font-display)', fontWeight: '800', letterSpacing: '0.08em' }}>
+            LAST VERIFIED: MAY 23, 2026
+          </div>
+        </div>
 
-          <section>
-            <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#ffffff', textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '0.02em', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '8px' }}>
-              3. Visual Accessibility (Contrast & Scale)
-            </h2>
-            <p>
-              To maintain our premium glassmorphic dark-mode aesthetic without sacrificing readability, we engineered our visual structure to include:
-            </p>
-            <ul style={{ paddingLeft: '20px', marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <li>
-                <strong>Sufficient Contrast:</strong> All text overlays are styled using HSL-derived variables, ensuring a contrast ratio of at least **4.5:1** against dark layout backgrounds, far exceeding basic browser readability tests.
-              </li>
-              <li>
-                <strong>Zoom Compatibility:</strong> Every font size is declared using flexible styling systems, allowing smooth scaling up to 200% via browser scaling without layout breakage or overlapping blocks.
-              </li>
-              <li>
-                <strong>Color Independence:</strong> We never convey cost-savings information solely through color indicators. All chart actions and metrics are supported by explicit labels and text descriptions.
-              </li>
-            </ul>
-          </section>
+        {/* Liquid Glass Bento Grid Highlights */}
+        <div style={{ 
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '24px',
+          marginBottom: '80px'
+        }}>
+          
+          {/* Card 1 */}
+          <div className="liquid-glass" style={{ padding: '36px', borderRadius: '16px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ 
+                color: '#00e676', 
+                backgroundColor: 'rgba(0, 230, 118, 0.05)', 
+                width: '44px', 
+                height: '44px', 
+                borderRadius: '9999px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <Eye size={20} />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', margin: '0 0 8px 0', color: '#ffffff', letterSpacing: '0.05em' }}>High Color Contrast</h3>
+                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.6' }}>
+                  Aesthetic layout selections are strictly checked against HSL contrast guidelines exceeding 4.5:1 ratios.
+                </p>
+              </div>
+            </div>
+          </div>
 
-          <section>
-            <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#ffffff', textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '0.02em', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '8px' }}>
-              4. Screen Reader Integration
-            </h2>
-            <p>
-              SpendSentry uses a single, logical `H1` tag per viewport page alongside structured `section` and `main` landmarks. We have implemented explicit, matching `id` tags for all interactive form fields (`team-size-input`, `usecase-select`, etc.) to facilitate perfect, uninterrupted keyboard tab navigation and descriptive focus reading for desktop and mobile screen readers.
-            </p>
-          </section>
+          {/* Card 2 */}
+          <div className="liquid-glass" style={{ padding: '36px', borderRadius: '16px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ 
+                color: '#00e676', 
+                backgroundColor: 'rgba(0, 230, 118, 0.05)', 
+                width: '44px', 
+                height: '44px', 
+                borderRadius: '9999px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <CheckCircle2 size={20} />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', margin: '0 0 8px 0', color: '#ffffff', letterSpacing: '0.05em' }}>Keyboard Navigation</h3>
+                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.6' }}>
+                  All custom input parameters, tool checkmarks, and form fields are fully operational via keyboard tab targets.
+                </p>
+              </div>
+            </div>
+          </div>
 
-          <section>
-            <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#ffffff', textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '0.02em', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '8px' }}>
-              5. Submit Feedback
+          {/* Card 3 */}
+          <div className="liquid-glass" style={{ padding: '36px', borderRadius: '16px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ 
+                color: '#00e676', 
+                backgroundColor: 'rgba(0, 230, 118, 0.05)', 
+                width: '44px', 
+                height: '44px', 
+                borderRadius: '9999px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <Sparkles size={20} />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', margin: '0 0 8px 0', color: '#ffffff', letterSpacing: '0.05em' }}>Semantic Elements</h3>
+                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.6' }}>
+                  Crafted using standard native tags with clear aria designations to support seamless screen reader operations.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Detailed Document Bento Layout */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+          
+          {/* Section 1 */}
+          <div className="liquid-glass" style={{ padding: '40px', borderRadius: '16px' }}>
+            <span style={{ fontSize: '11px', fontWeight: '800', color: '#00e676', tracking: '0.1em', uppercase: 'true', display: 'block', marginBottom: '12px', fontFamily: 'var(--font-display)' }}>
+              SECTION 1
+            </span>
+            <h2 style={{ fontSize: '28px', fontFamily: "'Instrument Serif', serif", fontWeight: '400', margin: '0 0 16px 0', color: '#ffffff' }}>
+              WCAG AA Conformance then <em style={{ fontStyle: 'italic', color: 'rgba(255,255,255,0.6)' }}>Standards</em>
             </h2>
-            <p>
-              We welcome your feedback on the accessibility of SpendSentry. If you experience any accessibility issues or barriers while running audits, planning cost optimization steps, or utilizing our dynamically generated share layouts, please let us know:
+            <p style={{ fontSize: '14px', lineHeight: '1.75', color: 'var(--text-secondary)' }}>
+              Web Content Accessibility Guidelines (WCAG) dictate standard specifications to establish digital access for users with disabilities. SpendSentry is fully conformant with WCAG 2.1 Level AA parameters, mapping clear layouts and color combinations to meet structural standards.
             </p>
-            <div style={{ marginTop: '20px', display: 'flex', alignItems: 'center', gap: '10px', color: '#00e676', fontWeight: '600' }}>
+          </div>
+
+          {/* Section 2 */}
+          <div className="liquid-glass" style={{ padding: '40px', borderRadius: '16px' }}>
+            <span style={{ fontSize: '11px', fontWeight: '800', color: '#00e676', tracking: '0.1em', uppercase: 'true', display: 'block', marginBottom: '12px', fontFamily: 'var(--font-display)' }}>
+              SECTION 2
+            </span>
+            <h2 style={{ fontSize: '28px', fontFamily: "'Instrument Serif', serif", fontWeight: '400', margin: '0 0 16px 0', color: '#ffffff' }}>
+              Contrast ratios then <em style={{ fontStyle: 'italic', color: 'rgba(255,255,255,0.6)' }}>Legibility</em>
+            </h2>
+            <p style={{ fontSize: '14px', lineHeight: '1.75', color: 'var(--text-secondary)' }}>
+              Our glassmorphic elements maintain contrast safety by checking text styling parameters against deep dark backdrops. We use HSL color tokens to guarantee reading copy is set to a crisp `text-neutral-200` contrast, keeping text legibility above the standard 4.5:1 ratio.
+            </p>
+          </div>
+
+          {/* Section 3 */}
+          <div className="liquid-glass" style={{ padding: '40px', borderRadius: '16px' }}>
+            <span style={{ fontSize: '11px', fontWeight: '800', color: '#00e676', tracking: '0.1em', uppercase: 'true', display: 'block', marginBottom: '12px', fontFamily: 'var(--font-display)' }}>
+              SECTION 3
+            </span>
+            <h2 style={{ fontSize: '28px', fontFamily: "'Instrument Serif', serif", fontWeight: '400', margin: '0 0 16px 0', color: '#ffffff' }}>
+              Interactive keyboard focus <em style={{ fontStyle: 'italic', color: 'rgba(255,255,255,0.6)' }}>Indicators</em>
+            </h2>
+            <p style={{ fontSize: '14px', lineHeight: '1.75', color: 'var(--text-secondary)' }}>
+              Standard screen readers require clear HTML DOM sequences to execute tab targets smoothly. SpendSentry features native HTML inputs, explicit matching focus markers, and responsive check outlines to guide keyboard-only users without mouse support.
+            </p>
+          </div>
+
+          {/* Section 4 */}
+          <div className="liquid-glass" style={{ padding: '40px', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div>
+              <span style={{ fontSize: '11px', fontWeight: '800', color: '#00e676', tracking: '0.1em', uppercase: 'true', display: 'block', marginBottom: '12px', fontFamily: 'var(--font-display)' }}>
+                CONTACT & IMPROVEMENTS
+              </span>
+              <h2 style={{ fontSize: '28px', fontFamily: "'Instrument Serif', serif", fontWeight: '400', margin: '0 0 16px 0', color: '#ffffff' }}>
+                Reader Feedback then <em style={{ fontStyle: 'italic', color: 'rgba(255,255,255,0.6)' }}>Support</em>
+              </h2>
+              <p style={{ fontSize: '14px', lineHeight: '1.75', color: 'var(--text-secondary)' }}>
+                If you encounter any barrier while interacting with SpendSentry dashboards, experiencing font delays, or sharing audit blueprints, please contact our accessibility support directly:
+              </p>
+            </div>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', color: '#00e676', fontWeight: '800', fontSize: '15px' }}>
               <Mail size={16} />
               <span>hello@credex.rocks</span>
             </div>
-          </section>
+          </div>
 
         </div>
 
@@ -191,12 +265,12 @@ export default function AccessibilityStatement() {
       {/* Footer */}
       <footer style={{ 
         borderTop: '1px solid var(--border-color)',
-        padding: '32px 40px',
+        padding: '40px 24px',
         textAlign: 'center',
         fontSize: '12px',
         color: 'var(--text-muted)'
       }}>
-        © 2026 SpendSentry. Designed and Engineered by HB Technologies. Sponsored by Credex.
+        © 2026 SpendSentry. Designed & Engineered by HB Technologies. Sponsored by Credex. Ranchi, Jharkhand, India.
       </footer>
 
     </div>

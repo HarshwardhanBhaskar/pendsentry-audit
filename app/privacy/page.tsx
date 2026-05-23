@@ -6,16 +6,29 @@ import Link from 'next/link';
 
 export default function PrivacyPolicy() {
   return (
-    <div style={{ backgroundColor: '#000000', minHeight: '100vh', display: 'flex', flexDirection: 'column', color: '#ffffff' }}>
+    <div style={{ backgroundColor: '#000000', minHeight: '100vh', display: 'flex', flexDirection: 'column', color: '#ffffff', overflowX: 'hidden' }}>
       
+      {/* Dynamic ambient background glow */}
+      <div style={{ 
+        position: 'absolute',
+        top: 0,
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '100%',
+        maxWidth: '1200px',
+        height: '600px',
+        background: 'radial-gradient(circle at top, rgba(0, 230, 118, 0.035) 0%, transparent 70%)',
+        pointerEvents: 'none',
+        zIndex: 0
+      }} />
+
       {/* Navigation */}
       <nav style={{ 
-        borderBottom: '1px solid var(--border-color)', 
         padding: '24px 40px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#000000',
+        backgroundColor: 'transparent',
         zIndex: 50,
         position: 'sticky',
         top: 0
@@ -34,157 +47,221 @@ export default function PrivacyPolicy() {
         <div>
           <Link 
             href="/" 
+            className="liquid-glass"
             style={{ 
               fontSize: '12px', 
-              color: '#000000', 
-              backgroundColor: '#00e676',
+              color: '#ffffff', 
               textDecoration: 'none', 
               fontWeight: '700', 
-              padding: '8px 18px',
+              padding: '10px 20px',
               borderRadius: '9999px',
               letterSpacing: '0.02em',
               display: 'flex',
               alignItems: 'center',
-              gap: '6px',
-              transition: 'background-color 0.2s'
+              gap: '8px',
+              transition: 'background-color 0.2s',
+              border: 'none'
             }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#00ff80'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#00e676'}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.05)'}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
           >
-            <ArrowLeft size={14} />
+            <ArrowLeft size={14} style={{ color: '#00e676' }} />
             <span>Back to Audit</span>
           </Link>
         </div>
       </nav>
 
       {/* Main Content Area */}
-      <main style={{ flex: 1, padding: '80px 24px', maxWidth: '900px', margin: '0 auto', width: '100%' }}>
+      <main style={{ flex: 1, padding: '80px 24px 120px 24px', maxWidth: '1000px', margin: '0 auto', width: '100%', zIndex: 10, position: 'relative' }}>
         
-        {/* Header Block */}
-        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-          <span style={{ fontSize: '12px', fontWeight: '800', color: '#00e676', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '16px', display: 'block' }}>
-            Privacy Shield Commitment
+        {/* Header Block with generated graphic */}
+        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+          {/* Custom generated 3D data shield graphic, beautifully centered */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
+            <div className="liquid-glass" style={{ borderRadius: '24px', padding: '6px', maxWidth: '140px' }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img 
+                src="/spend_sentry_shield.png" 
+                alt="SpendSentry Premium 3D Data Protection Shield" 
+                style={{ width: '100%', height: 'auto', borderRadius: '18px', display: 'block' }}
+              />
+            </div>
+          </div>
+
+          <span style={{ fontSize: '13px', fontWeight: '800', color: '#00e676', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '16px', display: 'block', fontFamily: 'var(--font-display)' }}>
+            Data Privacy Ledger
           </span>
-          <h1 style={{ fontSize: '48px', fontWeight: '800', fontFamily: 'var(--font-display)', letterSpacing: '-0.03em', margin: '0 0 16px 0', textTransform: 'uppercase' }}>
-            Privacy Policy
-          </h1>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '15px', maxWidth: '600px', margin: '0 auto', lineHeight: '1.6' }}>
-            Your privacy is our absolute priority. We do not sell your personal data, and we anonymize public reports to shield your corporate identity.
-          </p>
-          <div style={{ color: 'var(--text-muted)', fontSize: '12px', marginTop: '24px', fontFamily: 'var(--font-display)', fontWeight: '700' }}>
-            LAST UPDATED: MAY 23, 2026
-          </div>
-        </div>
-
-        {/* Highlight Card */}
-        <div className="glass-card" style={{ 
-          border: '1px solid var(--border-color)', 
-          padding: '32px', 
-          backgroundColor: 'var(--bg-primary)',
-          borderRadius: '4px',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: '24px',
-          marginBottom: '60px'
-        }}>
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <div style={{ color: '#00e676', marginTop: '4px' }}>
-              <ShieldCheck size={24} />
-            </div>
-            <div>
-              <h3 style={{ fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', margin: '0 0 6px 0', color: '#ffffff' }}>Zero Selling</h3>
-              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.5' }}>We never monetize, share, or sell your emails or startup budget logs to third-party ad brokers.</p>
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <div style={{ color: '#00e676', marginTop: '4px' }}>
-              <EyeOff size={24} />
-            </div>
-            <div>
-              <h3 style={{ fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', margin: '0 0 6px 0', color: '#ffffff' }}>Anonymized Shares</h3>
-              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.5' }}>Public audit results pages strip away all email addresses, company names, and employee roles.</p>
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <div style={{ color: '#00e676', marginTop: '4px' }}>
-              <Lock size={24} />
-            </div>
-            <div>
-              <h3 style={{ fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', margin: '0 0 6px 0', color: '#ffffff' }}>PostgreSQL Encryption</h3>
-              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.5' }}>All raw submissions are stored on private, authenticated and firewall-protected databases.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Text Document Block */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', lineHeight: '1.8', fontSize: '15px', color: 'var(--text-secondary)' }}>
           
-          <section>
-            <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#ffffff', textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '0.02em', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '8px' }}>
-              1. Information We Collect
+          <h1 style={{ 
+            fontSize: '64px', 
+            fontWeight: '400', 
+            fontFamily: "'Instrument Serif', serif", 
+            letterSpacing: '-0.02em', 
+            margin: '0 0 16px 0', 
+            color: '#ffffff',
+            lineHeight: '1.05'
+          }}>
+            Privacy then <em style={{ fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', color: 'rgba(255, 255, 255, 0.65)' }}>Policy</em>
+          </h1>
+          
+          <p style={{ color: 'var(--text-secondary)', fontSize: '16px', maxWidth: '640px', margin: '0 auto', lineHeight: '1.6' }}>
+            We engineer secure pipelines that safeguard corporate credentials, while delivering mathematically defensible AI savings with zero compromise.
+          </p>
+          <div style={{ color: 'var(--text-muted)', fontSize: '11px', marginTop: '24px', fontFamily: 'var(--font-display)', fontWeight: '800', letterSpacing: '0.08em' }}>
+            LAST SECURED: MAY 23, 2026
+          </div>
+        </div>
+
+        {/* Liquid Glass Bento Grid Highlights */}
+        <div style={{ 
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '24px',
+          marginBottom: '80px'
+        }}>
+          
+          {/* Card 1 */}
+          <div className="liquid-glass" style={{ padding: '36px', borderRadius: '16px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ 
+                color: '#00e676', 
+                backgroundColor: 'rgba(0, 230, 118, 0.05)', 
+                width: '44px', 
+                height: '44px', 
+                borderRadius: '9999px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <ShieldCheck size={20} />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', margin: '0 0 8px 0', color: '#ffffff', letterSpacing: '0.05em' }}>Zero Data Sales</h3>
+                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.6' }}>
+                  We never monetize, broker, or sell email lists or operational parameters. Your logs are yours alone.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2 */}
+          <div className="liquid-glass" style={{ padding: '36px', borderRadius: '16px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ 
+                color: '#00e676', 
+                backgroundColor: 'rgba(0, 230, 118, 0.05)', 
+                width: '44px', 
+                height: '44px', 
+                borderRadius: '9999px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <EyeOff size={20} />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', margin: '0 0 8px 0', color: '#ffffff', letterSpacing: '0.05em' }}>Anonymized Shares</h3>
+                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.6' }}>
+                  Publicly generated dashboard blueprints strip out all emails, user names, and company tags completely.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 3 */}
+          <div className="liquid-glass" style={{ padding: '36px', borderRadius: '16px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ 
+                color: '#00e676', 
+                backgroundColor: 'rgba(0, 230, 118, 0.05)', 
+                width: '44px', 
+                height: '44px', 
+                borderRadius: '9999px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <Lock size={20} />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', margin: '0 0 8px 0', color: '#ffffff', letterSpacing: '0.05em' }}>PostgreSQL Shield</h3>
+                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.6' }}>
+                  All persistent inputs are housed entirely within secured, authenticated, and firewall-protected databases.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Detailed Document Bento Layout */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+          
+          {/* Section 1 */}
+          <div className="liquid-glass" style={{ padding: '40px', borderRadius: '16px' }}>
+            <span style={{ fontSize: '11px', fontWeight: '800', color: '#00e676', tracking: '0.1em', uppercase: 'true', display: 'block', marginBottom: '12px', fontFamily: 'var(--font-display)' }}>
+              SECTION 1
+            </span>
+            <h2 style={{ fontSize: '28px', fontFamily: "'Instrument Serif', serif", fontWeight: '400', margin: '0 0 16px 0', color: '#ffffff' }}>
+              Information then <em style={{ fontStyle: 'italic', color: 'rgba(255,255,255,0.6)' }}>Processed</em>
             </h2>
-            <p>
-              To perform a comprehensive and mathematically defensible AI spend audit, SpendSentry processes two categories of information:
+            <p style={{ fontSize: '14px', lineHeight: '1.75', color: 'var(--text-secondary)' }}>
+              To compute mathematically defensible AI spend audits, SpendSentry processes two categories of business data:
             </p>
-            <ul style={{ paddingLeft: '20px', marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <ul style={{ paddingLeft: '20px', marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14px', lineHeight: '1.75', color: 'var(--text-secondary)' }}>
               <li>
-                <strong>Operational Audit Input (Self-Reported):</strong> This includes your team size, primary engineering or business workload scope, active SaaS tool subscription tiers (Cursor, Copilot, ChatGPT, Claude, Gemini, Windsurf), and estimated monthly custom API spends.
+                <strong>Operational Spend Data:</strong> Active tool subscriptions (Cursor, ChatGPT, Copilot, Claude, Gemini, Windsurf), team licenses, and custom API budgets.
               </li>
               <li>
-                <strong>Lead Contact Information:</strong> If you request a full optimization ledger, we collect your business email address, and optionally, your company name and professional role.
+                <strong>Secure Contact Captures:</strong> Business emails and optional company designations entered exclusively to dispatch confirmation savings templates.
               </li>
             </ul>
-          </section>
+          </div>
 
-          <section>
-            <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#ffffff', textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '0.02em', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '8px' }}>
-              2. How We Use Your Data
+          {/* Section 2 */}
+          <div className="liquid-glass" style={{ padding: '40px', borderRadius: '16px' }}>
+            <span style={{ fontSize: '11px', fontWeight: '800', color: '#00e676', tracking: '0.1em', uppercase: 'true', display: 'block', marginBottom: '12px', fontFamily: 'var(--font-display)' }}>
+              SECTION 2
+            </span>
+            <h2 style={{ fontSize: '28px', fontFamily: "'Instrument Serif', serif", fontWeight: '400', margin: '0 0 16px 0', color: '#ffffff' }}>
+              Audit Calculations then <em style={{ fontStyle: 'italic', color: 'rgba(255,255,255,0.6)' }}>Logic</em>
             </h2>
-            <p>
-              We process your operational data exclusively to evaluate licenses and compile immediate, actionable cost-reduction recommendations:
+            <p style={{ fontSize: '14px', lineHeight: '1.75', color: 'var(--text-secondary)' }}>
+              Operational spend parameters are run through isolated, deterministic algorithms to optimize license usage. These routines detect overlapping coding editors, flag seat billing limits, and compile options. No personal data is combined or utilized for model training.
             </p>
-            <ul style={{ paddingLeft: '20px', marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <li>To execute deterministic calculations identifying plan redundancies and seat billing minimum thresholds.</li>
-              <li>To securely dispatch transactional audit summaries directly to your inbox via the Resend API.</li>
-              <li>To trigger specialized enterprise consulting workflows with our sponsor, Credex, if savings exceed our high-spend consulting limit (greater than or equal to $500/mo).</li>
-            </ul>
-          </section>
+          </div>
 
-          <section>
-            <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#ffffff', textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '0.02em', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '8px' }}>
-              3. Shareable Page Anonymization
+          {/* Section 3 */}
+          <div className="liquid-glass" style={{ padding: '40px', borderRadius: '16px' }}>
+            <span style={{ fontSize: '11px', fontWeight: '800', color: '#00e676', tracking: '0.1em', uppercase: 'true', display: 'block', marginBottom: '12px', fontFamily: 'var(--font-display)' }}>
+              SECTION 3
+            </span>
+            <h2 style={{ fontSize: '28px', fontFamily: "'Instrument Serif', serif", fontWeight: '400', margin: '0 0 16px 0', color: '#ffffff' }}>
+              Full Blueprint <em style={{ fontStyle: 'italic', color: 'rgba(255,255,255,0.6)' }}>Anonymization</em>
             </h2>
-            <p>
-              SpendSentry features viral shared blueprints (`/share/[id]`) so you can present cost savings directly to your Chief Financial Officer, VP of Engineering, or accounting department. 
+            <p style={{ fontSize: '14px', lineHeight: '1.75', color: 'var(--text-secondary)' }}>
+              All dynamic shareable endpoints (`/share/[id]`) are thoroughly stripped of lead identifiers prior to server-side render. A guest user viewing your shared blueprint will only see aggregated charts and plan recommendations, guaranteeing absolute data safety.
             </p>
-            <p style={{ marginTop: '12px' }}>
-              To ensure absolute privacy, **the server completely strips out the email address, company name, and user role** from the public dashboard before compiling the layout. Visitors looking at a shared dashboard will only see the aggregated calculations, metrics graphs, and optimization steps. Your identity remains 100% private.
-            </p>
-          </section>
+          </div>
 
-          <section>
-            <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#ffffff', textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '0.02em', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '8px' }}>
-              4. Third-Party Integrations
-            </h2>
-            <p>
-              SpendSentry does not make client-side calls to external models or messaging vendors to prevent browser scraping. To draft personalized executive analysis briefs, we query **Google Gemini** (`gemini-2.5-flash`) and **Anthropic** (`claude-3-5-sonnet`) securely from our private serverless route handlers. No identifying data is shared with AI providers; they are fed only anonymized numbers and workload definitions.
-            </p>
-          </section>
-
-          <section>
-            <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#ffffff', textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '0.02em', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '8px' }}>
-              5. Contact Us
-            </h2>
-            <p>
-              If you have any questions about this Privacy Policy, your stored lead details, or if you wish to request the manual deletion of your audit record from our Postgres table, please reach out to us:
-            </p>
-            <div style={{ marginTop: '20px', display: 'flex', alignItems: 'center', gap: '10px', color: '#00e676', fontWeight: '600' }}>
+          {/* Section 4 */}
+          <div className="liquid-glass" style={{ padding: '40px', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div>
+              <span style={{ fontSize: '11px', fontWeight: '800', color: '#00e676', tracking: '0.1em', uppercase: 'true', display: 'block', marginBottom: '12px', fontFamily: 'var(--font-display)' }}>
+                CONTACT & DELETIONS
+              </span>
+              <h2 style={{ fontSize: '28px', fontFamily: "'Instrument Serif', serif", fontWeight: '400', margin: '0 0 16px 0', color: '#ffffff' }}>
+                Secure Data then <em style={{ fontStyle: 'italic', color: 'rgba(255,255,255,0.6)' }}>Control</em>
+              </h2>
+              <p style={{ fontSize: '14px', lineHeight: '1.75', color: 'var(--text-secondary)' }}>
+                You maintain complete authority over your lead information. To query your records, request manual record deletion, or discuss our sponsor Credex's credits integration, contact our privacy engineering team directly:
+              </p>
+            </div>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', color: '#00e676', fontWeight: '800', fontSize: '15px' }}>
               <Mail size={16} />
               <span>hello@credex.rocks</span>
             </div>
-          </section>
+          </div>
 
         </div>
 
@@ -193,12 +270,12 @@ export default function PrivacyPolicy() {
       {/* Footer */}
       <footer style={{ 
         borderTop: '1px solid var(--border-color)',
-        padding: '32px 40px',
+        padding: '40px 24px',
         textAlign: 'center',
         fontSize: '12px',
         color: 'var(--text-muted)'
       }}>
-        © 2026 SpendSentry. Designed and Engineered by HB Technologies. Sponsored by Credex.
+        © 2026 SpendSentry. Designed & Engineered by HB Technologies. Sponsored by Credex. Ranchi, Jharkhand, India.
       </footer>
 
     </div>
