@@ -104,15 +104,19 @@ This document tracks progress, design decisions, hours worked, learnings, and bl
 ---
 
 ## Day 5 — 2026-05-24
-**Hours worked:** 1
+**Hours worked:** 3
 **What I did:**
 - Conducted a comprehensive final review and proofreading of the 13 mandatory root files (`README.md`, `ARCHITECTURE.md`, `REFLECTION.md`, etc.), ensuring word counts, citations, formatting, and checklist compliance are completely met.
+- Expanded our unit testing suite: added custom test cases in `tests/auditEngine.test.ts` targeting Windsurf team-size-1 downgrade logic.
+- Built a brand new unit testing suite `tests/rateLimit.test.ts` to test our IP-based sliding window rate limiter, verifying connection isolation, quota decreases, and sliding-window timestamp calculations with Vitest mock timers.
+- Aligned documentation in `TESTS.md` to map the expanded 10-test coverage structure.
 - Executed final local TypeScript validation (`npx tsc --noEmit`) and ran the full unit test suite (`npm run test`) to guarantee 100% build health.
 - Verified a completely clean working tree (`git status`) and finalized repository sync.
 - Completed all log updates and officially signed off on the SpendSentry take-home sprint!
 
 **What I learned:**
 - Rigorous systematic review of files on the final calendar day guarantees that evaluators receive a professional, 100% compliant, and highly detailed repository out-of-the-box.
+- Leveraging `vi.useFakeTimers()` in Vitest enables reliable, mock-based sliding window evaluations for rate limiters without needing real-world sleep intervals in tests.
 
 **Blockers / what I'm stuck on:**
 - None. The B2B SaaS spend auditor, Supabase integration, Resend mailer, and Gemini CFO analysis handlers are all fully active, deployed, and 100% operational!
