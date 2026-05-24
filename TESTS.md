@@ -26,9 +26,11 @@ npx vitest
 
 ## 2. Test File Registry
 
-### File Path: [tests/auditEngine.test.ts](file:///c:/Users/hwbha/Desktop/output/output/output/output/output/output/.vscode/output/c++%20programs/spend-sentry/tests/auditEngine.test.ts)
+### 1. [tests/auditEngine.test.ts](file:///c:/Users/hwbha/Desktop/output/output/output/output/output/output/.vscode/output/c++%20programs/spend-sentry/tests/auditEngine.test.ts)
+This file contains our core suite of **6 comprehensive test scenarios** verifying the mathematical accuracy and defensibility of our financial logic.
 
-This file contains our core suite of **5 comprehensive test scenarios** verifying the mathematical accuracy and defensibility of our financial logic.
+### 2. [tests/rateLimit.test.ts](file:///c:/Users/hwbha/Desktop/output/output/output/output/output/output/.vscode/output/c++%20programs/spend-sentry/tests/rateLimit.test.ts)
+This file contains a robust set of **4 automated test scenarios** verifying sliding-window behavior, IP-based namespace isolation, remaining quotas, and dynamic time-based expiration of requests.
 
 ---
 
@@ -77,3 +79,30 @@ This file contains our core suite of **5 comprehensive test scenarios** verifyin
   - Monthly Savings: `$350.00/mo` (25% off)
   - Savings Tier: `high_savings`
   - Credex Trigger: `true` (Surfaces prominent lead-generation booking buttons).
+
+### Test Scenario 6: `Should recommend downgrading Windsurf Teams to Windsurf Pro for a single developer`
+- **Objective:** Verify that the engine accurately triggers Rule E's Windsurf team-size-1 downgrade logic when a team of 1 is subscribed to the higher Teams tier.
+- **Mock Input:** 1 developer on the Windsurf Teams plan ($40/mo).
+- **Expected Output:**
+  - Recommended Action: Downgrade from Windsurf Teams to Windsurf Pro ($20/mo).
+  - Calculated Current Charge: `$40.00/mo`
+  - Optimized Charge: `$20.00/mo`
+  - Monthly Savings: `$20.00/mo`
+  - Reason: *"You are paying for Windsurf Teams for a single user. Downgrading to Windsurf Pro offers equivalent AI agent coding for $20/mo less."*
+
+---
+
+## 4. Rate Limiter Test Coverage
+
+### File Path: [tests/rateLimit.test.ts](file:///c:/Users/hwbha/Desktop/output/output/output/output/output/output/.vscode/output/c++%20programs/spend-sentry/tests/rateLimit.test.ts)
+
+This file contains 4 robust automated tests validating the slide-window rate limiter implementation:
+
+1. **`should allow requests under the limit and decrease remaining quota correctly`**
+   - **Objective:** Confirms that normal traffic under the limit is allowed without blocks and that remaining request quotas count down correctly.
+2. **`should block requests exceeding the limit and calculate retry time correctly`**
+   - **Objective:** Verifies that once a client hits their max request limit within the sliding window, they receive a block (429 status response equivalent) and an accurate `retryAfterMs` timestamp calculations.
+3. **`should isolate rate limiting counts between different IP addresses`**
+   - **Objective:** Validates that rate-limiting states are tracked on a per-IP namespace basis, ensuring active traffic from one IP does not block or leak quotas into other client connections.
+4. **`should reset limits and allow new requests after the window expires`**
+   - **Objective:** Confirms that sliding window durations are mathematically accurate by using Vitest fake timers (`vi.useFakeTimers()`) to step forward past the restriction window, verifying blocked IPs automatically recover full access.
