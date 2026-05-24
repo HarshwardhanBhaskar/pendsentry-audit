@@ -34,7 +34,6 @@ describe('IP-Based Sliding Window Rate Limiter Tests', () => {
   it('should block requests exceeding the limit and calculate retry time correctly', () => {
     const ip = '192.168.1.101';
     const config = { maxRequests: 2, windowMs: 60_000 };
-    const startTime = Date.now();
 
     // 1st request
     checkRateLimit(ip, config);
