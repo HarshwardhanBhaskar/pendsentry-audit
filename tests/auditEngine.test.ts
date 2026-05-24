@@ -142,4 +142,32 @@ describe('SpendSentry Audit Engine Tests', () => {
     expect(result.toolBreakdown.openai_api.actionType).toBe('credits');
     expect(result.toolBreakdown.anthropic_api.recommendation).toContain('Buy credits through Credex');
   });
+
+  // Test Scenario 6: Windsurf Teams Downgrade for Single Developer
+  it('should recommend downgrading Windsurf Teams to Windsurf Pro for a single developer', () => {
+    const singleWindsurfInput: AuditInput = {
+      teamSize: 1,
+      primaryUseCase: 'coding',
+      tools: {
+        cursor: { enabled: false, plan: 'hobby', seats: 0 },
+        copilot: { enabled: false, plan: 'free', seats: 0 },
+        claude: { enabled: false, plan: 'free', seats: 0 },
+        chatgpt: { enabled: false, plan: 'free', seats: 0 },
+        anthropic_api: { enabled: false, plan: 'pay_as_you_go', seats: 0 },
+        openai_api: { enabled: false, plan: 'pay_as_you_go', seats: 0 },
+        gemini: { enabled: false, plan: 'free', seats: 0 },
+        windsurf: { enabled: true, plan: 'teams', seats: 1 }, // Windsurf Teams $40/mo for 1 seat
+      },
+    };
+
+    const result = runSpendAudit(singleWindsurfInput);
+
+    expect(result.totalMonthlySpend).toBe(40.0);
+    expect(result.totalOptimizedSpend).toBe(20.0); // Windsurf Pro is $20
+    expect(result.totalMonthlySavings).toBe(20.0);
+    expect(result.totalAnnualSavings).toBe(240.0);
+    expect(result.toolBreakdown.windsurf.actionType).toBe('downgrade');
+    expect(result.toolBreakdown.windsurf.recommendation).toContain('Downgrade to Windsurf Pro');
+    expect(result.toolBreakdown.windsurf.reason).toContain('You are paying for Windsurf Teams for a single user');
+  });
 });
